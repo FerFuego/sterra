@@ -4,16 +4,16 @@
 
 <?php
     // Variables para los Productos 
-    $id         = (isset($_GET['id'])           ? filter_var($_GET['id'],          FILTER_VALIDATE_INT) : null);
-    $id_rubro   = (isset($_GET["id_rubro"])     ? filter_var($_GET["id_rubro"],    FILTER_VALIDATE_INT) : "");
-    $id_subrubro = (isset($_GET["id_subrubro"]) ? filter_var($_GET["id_subrubro"], FILTER_VALIDATE_INT) : "");
-    $id_grupo   = (isset($_GET["id_grupo"])     ? filter_var($_GET["id_grupo"],    FILTER_VALIDATE_INT) : "");
-    $minamount  = (isset($_GET["minamount"])    ? filter_var(str_replace('$','',$_GET["minamount"]),   FILTER_VALIDATE_INT) : null);
-    $maxamount  = (isset($_GET["maxamount"])    ? filter_var(str_replace('$','',$_GET["maxamount"]),   FILTER_VALIDATE_INT) : null);
-    $order      = (isset($_GET['order'])        ? filter_var($_GET['order'],       FILTER_SANITIZE_STRING) : "");
-    $page       = (isset($_GET["page"])         ? filter_var($_GET["page"],        FILTER_VALIDATE_INT) : 1);
-    $search     = (isset($_GET['s'])            ? filter_var($_GET['s'],           FILTER_SANITIZE_STRING) : "");
-    $opcion     = (isset($_GET['opcion'])       ? filter_var($_GET['opcion'],      FILTER_SANITIZE_STRING) : "");
+    $id         = (isset($_GET['id'])           ? filter_var($_GET['id'],          FILTER_UNSAFE_RAW) : null);
+    $id_rubro   = (isset($_GET["id_rubro"])     ? filter_var($_GET["id_rubro"],    FILTER_UNSAFE_RAW) : "");
+    $id_subrubro = (isset($_GET["id_subrubro"]) ? filter_var($_GET["id_subrubro"], FILTER_UNSAFE_RAW) : "");
+    $id_grupo   = (isset($_GET["id_grupo"])     ? filter_var($_GET["id_grupo"],    FILTER_UNSAFE_RAW) : "");
+    $minamount  = (isset($_GET["minamount"])    ? filter_var(str_replace('$','',$_GET["minamount"]),   FILTER_UNSAFE_RAW) : null);
+    $maxamount  = (isset($_GET["maxamount"])    ? filter_var(str_replace('$','',$_GET["maxamount"]),   FILTER_UNSAFE_RAW) : null);
+    $order      = (isset($_GET['order'])        ? filter_var($_GET['order'],       FILTER_UNSAFE_RAW) : "");
+    $page       = (isset($_GET["page"])         ? filter_var($_GET["page"],        FILTER_UNSAFE_RAW) : 1);
+    $search     = (isset($_GET['s'])            ? filter_var($_GET['s'],           FILTER_UNSAFE_RAW) : "");
+    $opcion     = (isset($_GET['opcion'])       ? filter_var($_GET['opcion'],      FILTER_UNSAFE_RAW) : "");
     $limit      = 21; //Limito la busqueda
     $links      = 6; // limito los items a mostrar en el paginador
     $general = new Configuracion();
