@@ -38,11 +38,10 @@
 -----------------------*/
 
 .categories__item {
-    background: linear-gradient(to top, rgba(127,173, 57, 0.9), rgba(0, 0, 0, 0)) !important;
+    background: $primary-color;
     height: 300px;
     position: relative;
     padding-top: 1px;
-    //background-color: rgba(127, 173, 57, 1);
 
     img {
         width: 60% !important;
