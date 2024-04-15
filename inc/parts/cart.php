@@ -47,34 +47,36 @@
         <div class="col-lg-6">
             <div class="js-cart-message"></div>
             <div class="shoping__continue">
-                <div class="shoping__discount shoping__checkout">
-                    <h5>Tabla de Descuentos</h5>
-                    <table class="table table-bordered">
-                        <thead>
-                            <th>Descuento</th>
-                            <th>&nbsp;&nbsp;Compras</th>
-                        </thead>
-                        <?php
-                            $general = new Configuracion();
-                            $data = json_decode($general->getDescuentos(), true);
-                            if (!empty($data)) :
-                                foreach ($data as $key => $value) { ?>
-                                    <tr>
-                                        <td><?= $value['descuento'] . "%"; ?></td>
-                                        <td>> $<?php echo  number_format($value['precio'], 2,',','.'); ?></td>
-                                    </tr>
-                                <?php }
-                            endif; 
-                        ?>
-                    </table>
-                    <div class="alert alert-danger mb-0" role="alert">
-                        <i class="fa fa-exclamation-circle"></i> Si ya sos cliente, ingresa con tu usuario y accede a nuestros descuentos por compra mayorista.
+                <?php if (!isset($_SESSION['user'])): ?>
+                    <div class="shoping__discount shoping__checkout">
+                        <h5>Tabla de Descuentos</h5>
+                        <table class="table table-bordered">
+                            <thead>
+                                <th>Descuento</th>
+                                <th>&nbsp;&nbsp;Compras</th>
+                            </thead>
+                            <?php
+                                $general = new Configuracion();
+                                $data = json_decode($general->getDescuentos(), true);
+                                if (!empty($data)) :
+                                    foreach ($data as $key => $value) { ?>
+                                        <tr>
+                                            <td><?= $value['descuento'] . "%"; ?></td>
+                                            <td>> $<?php echo  number_format($value['precio'], 2,',','.'); ?></td>
+                                        </tr>
+                                    <?php }
+                                endif; 
+                            ?>
+                        </table>
+                        <div class="alert alert-danger mb-0" role="alert">
+                            <i class="fa fa-exclamation-circle"></i> Si ya sos cliente, ingresa con tu usuario y accede a nuestros descuentos por compra mayorista.
+                        </div>
+                        <!-- <form action="#">
+                            <input type="text" placeholder="Enter your coupon code">
+                            <button type="submit" class="site-btn">APPLY COUPON</button>
+                        </form> -->
                     </div>
-                    <!-- <form action="#">
-                        <input type="text" placeholder="Enter your coupon code">
-                        <button type="submit" class="site-btn">APPLY COUPON</button>
-                    </form> -->
-                </div>
+                <?php endif; ?>
             </div>
         </div>
         <div class="col-lg-6">
