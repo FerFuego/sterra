@@ -26,6 +26,10 @@
   border-radius: 10px;
   overflow: hidden;
 
+  img {
+    filter: drop-shadow(2px 4px 6px black);
+  }
+
   a {
     display: inline-block;
   }
