@@ -124,6 +124,16 @@
                 </div>
             </div>
             <div class="d-flex">
+                <div class="form-group w-100 pl-2">
+                    <br>
+                    <label for="aumento_1">Mostrar Precios en la tienda implica que los usuarios puedan realizar pedidos sin iniciar sesión.</label> 
+                </div>
+                <div class="form-group w-100 pl-2">
+                    <label for="aumento_1">Marcada = Mostras / Desmarcada = Ocultar</label> <br>
+                    <input type="checkbox" name="show_prices" id="show_prices" value="1" <?php echo $general->show_prices ? 'checked' : ''; ?>>
+                </div>
+            </div>
+            <div class="d-flex">
                 <div class="form-group w-100 pl-2 mt-4">
                     <table id="js-table-descuentos">
                         <thead>

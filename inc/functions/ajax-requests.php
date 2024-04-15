@@ -10,19 +10,19 @@ require('class-store.php');
  */
 if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'actionLogin') {
 
-    $user = (isset($_POST['user']) ? filter_var($_POST['user'], FILTER_SANITIZE_STRING) : null);
-    $pass = (isset($_POST['pass']) ? filter_var($_POST['pass'], FILTER_SANITIZE_STRING) : null);
+    $user = (isset($_POST['user']) ? filter_var($_POST['user'], FILTER_UNSAFE_RAW) : null);
+    $pass = (isset($_POST['pass']) ? filter_var($_POST['pass'], FILTER_UNSAFE_RAW) : null);
     $recaptcha = (isset($_POST['g-recaptcha-response']) ? $_POST['g-recaptcha-response'] : null);
     $login = 'false';
     $updated = false;
 
-    $request = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".Store::get_google_api()."&response=".$recaptcha."&remoteip=".$_SERVER['REMOTE_ADDR']);
-    $response = json_decode($request);
+    // $request = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".Store::get_google_api()."&response=".$recaptcha."&remoteip=".$_SERVER['REMOTE_ADDR']);
+    // $response = json_decode($request);
     
-    if ( $response->success === false ) {
-        echo 'Captcha Incorrecto!';
-        die();
-    }
+    // if ( $response->success === false ) {
+    //     echo 'Captcha Incorrecto!';
+    //     die();
+    // }
 
     $access = new Login($user, $pass);
     $result = $access->loginProcess();
@@ -65,7 +65,7 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'actionLogi
  */
 if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'getSubRubroByIdRubro') {
 
-    $id_rubro = filter_var($_POST["id_rubro"], FILTER_VALIDATE_INT);
+    $id_rubro = filter_var($_POST["id_rubro"], FILTER_UNSAFE_RAW);
 
     $object = new Subrubros();
     $result = $object->getSubRubroByIdRubro($id_rubro);
@@ -90,7 +90,7 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'getSubRubr
  */
 if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'getGrupoByIdSubRubro') {
 
-    $id_subrubro = filter_var($_POST["id_subrubro"], FILTER_VALIDATE_INT);
+    $id_subrubro = filter_var($_POST["id_subrubro"], FILTER_UNSAFE_RAW);
 
     $object = new Subrubros();
     $result = $object->getGrupoByIdSubRubro($id_subrubro);
@@ -112,10 +112,10 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'getGrupoBy
  */
 if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'insertProductCart') {
 
-    $id_product = (isset($_POST['id_product']) ? filter_var($_POST['id_product'], FILTER_VALIDATE_INT) : null);
-    $cod_product = (isset($_POST['cod_product']) ? filter_var($_POST['cod_product'], FILTER_SANITIZE_STRING) : null);
-    $note    = (isset($_POST['nota']) ? filter_var($_POST['nota'], FILTER_SANITIZE_STRING) : null);
-    $cant    = (isset($_POST['cant']) ? filter_var($_POST['cant'], FILTER_VALIDATE_INT) : null);
+    $id_product = (isset($_POST['id_product']) ? filter_var($_POST['id_product'], FILTER_UNSAFE_RAW) : null);
+    $cod_product = (isset($_POST['cod_product']) ? filter_var($_POST['cod_product'], FILTER_UNSAFE_RAW) : null);
+    $note    = (isset($_POST['nota']) ? filter_var($_POST['nota'], FILTER_UNSAFE_RAW) : null);
+    $cant    = (isset($_POST['cant']) ? filter_var($_POST['cant'], FILTER_UNSAFE_RAW) : null);
 
     $order = new Pedidos();
     $result = $order->getPedidoAbierto($_SESSION["Id_Cliente"]);
@@ -173,10 +173,10 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'insertProd
  */
 if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'updateProductCart') {
 
-    $note    = (isset($_POST['nota']) ? filter_var($_POST['nota'], FILTER_SANITIZE_STRING) : null);
-    $cant    = (isset($_POST['cant']) ? filter_var($_POST['cant'], FILTER_VALIDATE_INT) : null);
-    $CodProducto = (isset($_POST['codprod']) ? filter_var($_POST['codprod'], FILTER_VALIDATE_INT) : null);
-    $id_productItem = (isset($_POST['id_item']) ? filter_var($_POST['id_item'], FILTER_VALIDATE_INT) : null);
+    $note    = (isset($_POST['nota']) ? filter_var($_POST['nota'], FILTER_UNSAFE_RAW) : null);
+    $cant    = (isset($_POST['cant']) ? filter_var($_POST['cant'], FILTER_UNSAFE_RAW) : null);
+    $CodProducto = (isset($_POST['codprod']) ? filter_var($_POST['codprod'], FILTER_UNSAFE_RAW) : null);
+    $id_productItem = (isset($_POST['id_item']) ? filter_var($_POST['id_item'], FILTER_UNSAFE_RAW) : null);
 
     $prod = new Productos($CodProducto);
 
@@ -197,7 +197,7 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'updateProd
  */
 if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'deleteProductCart') {
 
-    $id_productItem = (isset($_POST['id_item']) ? filter_var($_POST['id_item'], FILTER_VALIDATE_INT) : null);
+    $id_productItem = (isset($_POST['id_item']) ? filter_var($_POST['id_item'], FILTER_UNSAFE_RAW) : null);
 
     $item = new Detalles();
     $item->Auto = $id_productItem;
@@ -211,7 +211,7 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'deleteProd
  */
 if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'finallyOrder') {
 
-    $id_pedido = (isset($_POST['id_pedido']) ? filter_var($_POST['id_pedido'], FILTER_VALIDATE_INT) : null);
+    $id_pedido = (isset($_POST['id_pedido']) ? filter_var($_POST['id_pedido'], FILTER_UNSAFE_RAW) : null);
     $data      = isset($_POST['data']) ? json_decode($_POST['data']) : null;
 
     if (!isset($_SESSION["Id_Cliente"]) || $_SESSION["Id_Cliente"] == 0) die('false');
@@ -253,7 +253,7 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'finallyOrd
  */
 if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'finallyOrderAdmin') {
 
-    $id_pedido = (isset($_POST['id_pedido']) ? filter_var($_POST['id_pedido'], FILTER_VALIDATE_INT) : null);
+    $id_pedido = (isset($_POST['id_pedido']) ? filter_var($_POST['id_pedido'], FILTER_UNSAFE_RAW) : null);
     $data      = isset($_POST['data']) ? json_decode($_POST['data']) : null;
     
     if (!isset($_SESSION["Id_Cliente"]) || $_SESSION["Id_Cliente"] == 0) die('false');
@@ -280,7 +280,7 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'finallyOrd
  */
 if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'deleteOrderAdmin') {
 
-    $Id_Pedido = (isset($_POST['Id_Pedido']) ? filter_var($_POST['Id_Pedido'], FILTER_VALIDATE_INT) : null);
+    $Id_Pedido = (isset($_POST['Id_Pedido']) ? filter_var($_POST['Id_Pedido'], FILTER_UNSAFE_RAW) : null);
     
     try {
         $categ = new Pedidos($Id_Pedido);
@@ -296,7 +296,7 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'deleteOrde
  */
 if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'dataClient') {
 
-    $id_client = (isset($_POST['id_client']) ? filter_var($_POST['id_client'], FILTER_VALIDATE_INT) : null);
+    $id_client = (isset($_POST['id_client']) ? filter_var($_POST['id_client'], FILTER_UNSAFE_RAW) : null);
     
     if ( $id_client ) {
         $user = new Usuarios($id_client);
@@ -312,14 +312,14 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'dataClient
  */
 if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'operationClient') {
 
-    $id   = (isset($_POST['id']) ? filter_var($_POST['id'], FILTER_VALIDATE_INT) : null);
-    $type = (isset($_POST['type']) ? filter_var($_POST['type'], FILTER_SANITIZE_STRING) : null);
-    $name = (isset($_POST['name']) ? filter_var($_POST['name'], FILTER_SANITIZE_STRING) : null);
-    $mail = (isset($_POST['mail']) ? filter_var($_POST['mail'], FILTER_SANITIZE_STRING) : null);
-    $price = (isset($_POST['price']) ? filter_var($_POST['price'], FILTER_VALIDATE_INT) : null);
-    $locality = (isset($_POST['locality']) ? filter_var($_POST['locality'], FILTER_SANITIZE_STRING) : null);
-    $username = (isset($_POST['username']) ? filter_var($_POST['username'], FILTER_SANITIZE_STRING) : null);
-    $password = (isset($_POST['password']) ? filter_var($_POST['password'], FILTER_SANITIZE_STRING) : null);
+    $id   = (isset($_POST['id']) ? filter_var($_POST['id'], FILTER_UNSAFE_RAW) : null);
+    $type = (isset($_POST['type']) ? filter_var($_POST['type'], FILTER_UNSAFE_RAW) : null);
+    $name = (isset($_POST['name']) ? filter_var($_POST['name'], FILTER_UNSAFE_RAW) : null);
+    $mail = (isset($_POST['mail']) ? filter_var($_POST['mail'], FILTER_UNSAFE_RAW) : null);
+    $price = (isset($_POST['price']) ? filter_var($_POST['price'], FILTER_UNSAFE_RAW) : null);
+    $locality = (isset($_POST['locality']) ? filter_var($_POST['locality'], FILTER_UNSAFE_RAW) : null);
+    $username = (isset($_POST['username']) ? filter_var($_POST['username'], FILTER_UNSAFE_RAW) : null);
+    $password = (isset($_POST['password']) ? filter_var($_POST['password'], FILTER_UNSAFE_RAW) : null);
 
     if ( $type == 'new') {
         $user = new Usuarios();
@@ -362,7 +362,7 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'operationC
  */
 if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'dataProduct') {
 
-    $cod_product = (isset($_POST['cod_product']) ? filter_var($_POST['cod_product'], FILTER_SANITIZE_STRING) : null);
+    $cod_product = (isset($_POST['cod_product']) ? filter_var($_POST['cod_product'], FILTER_UNSAFE_RAW) : null);
     
     if ( $cod_product ) {
         $prod = new Productos($cod_product);
@@ -378,12 +378,12 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'dataProduc
  */
 if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'operationProduct') {
 
-    $cod_prod   = (isset($_POST['cod_prod']) ? filter_var($_POST['cod_prod'], FILTER_VALIDATE_INT) : null);
-    $name_prod  = (isset($_POST['name_prod']) ? filter_var($_POST['name_prod'], FILTER_SANITIZE_STRING) : null);
-    $type   = (isset($_POST['type_prod']) ? filter_var($_POST['type_prod'], FILTER_SANITIZE_STRING) : null);
-    $news   = (isset($_POST['news']) ? filter_var($_POST['news'], FILTER_VALIDATE_INT) : null);
-    $offer  = (isset($_POST['offer']) ? filter_var($_POST['offer'], FILTER_VALIDATE_INT) : null);
-    $observation = (isset($_POST['observation']) ? filter_var($_POST['observation'], FILTER_SANITIZE_STRING) : null);
+    $cod_prod   = (isset($_POST['cod_prod']) ? filter_var($_POST['cod_prod'], FILTER_UNSAFE_RAW) : null);
+    $name_prod  = (isset($_POST['name_prod']) ? filter_var($_POST['name_prod'], FILTER_UNSAFE_RAW) : null);
+    $type   = (isset($_POST['type_prod']) ? filter_var($_POST['type_prod'], FILTER_UNSAFE_RAW) : null);
+    $news   = (isset($_POST['news']) ? filter_var($_POST['news'], FILTER_UNSAFE_RAW) : null);
+    $offer  = (isset($_POST['offer']) ? filter_var($_POST['offer'], FILTER_UNSAFE_RAW) : null);
+    $observation = (isset($_POST['observation']) ? filter_var($_POST['observation'], FILTER_UNSAFE_RAW) : null);
 
     if ( $type == 'edit' ) {
         $prod = new Productos($cod_prod);
@@ -409,7 +409,7 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'operationP
  */
 if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'dataBanner') {
 
-    $id_banner = (isset($_POST['id_banner']) ? filter_var($_POST['id_banner'], FILTER_VALIDATE_INT) : null);
+    $id_banner = (isset($_POST['id_banner']) ? filter_var($_POST['id_banner'], FILTER_UNSAFE_RAW) : null);
     
     if ( $id_banner ) {
         $bann = new Banners($id_banner);
@@ -425,13 +425,13 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'dataBanner
  */
 if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'operationBanner') {
 
-    $type   = (isset($_POST['type'])  ? filter_var($_POST['type'], FILTER_SANITIZE_STRING) : null);
-    $orden  = (isset($_POST['order']) ? filter_var($_POST['order'], FILTER_VALIDATE_INT) : null);
-    $title  = (isset($_POST['title']) ? filter_var($_POST['title'], FILTER_SANITIZE_STRING) : null);
-    $text   = (isset($_POST['text'])  ? filter_var($_POST['text'], FILTER_SANITIZE_STRING) : null);
-    $link   = (isset($_POST['link'])  ? filter_var($_POST['link'], FILTER_SANITIZE_STRING) : null);
-    $small   = (isset($_POST['small'])  ? filter_var($_POST['small'], FILTER_SANITIZE_STRING) : null);
-    $id_banner = (isset($_POST['id_banner']) ? filter_var($_POST['id_banner'], FILTER_VALIDATE_INT) : null);
+    $type   = (isset($_POST['type'])  ? filter_var($_POST['type'], FILTER_UNSAFE_RAW) : null);
+    $orden  = (isset($_POST['order']) ? filter_var($_POST['order'], FILTER_UNSAFE_RAW) : null);
+    $title  = (isset($_POST['title']) ? filter_var($_POST['title'], FILTER_UNSAFE_RAW) : null);
+    $text   = (isset($_POST['text'])  ? filter_var($_POST['text'], FILTER_UNSAFE_RAW) : null);
+    $link   = (isset($_POST['link'])  ? filter_var($_POST['link'], FILTER_UNSAFE_RAW) : null);
+    $small   = (isset($_POST['small'])  ? filter_var($_POST['small'], FILTER_UNSAFE_RAW) : null);
+    $id_banner = (isset($_POST['id_banner']) ? filter_var($_POST['id_banner'], FILTER_UNSAFE_RAW) : null);
     $response  = 0;
 
     if(isset($_FILES['file']['name'])){
@@ -495,16 +495,17 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'operationC
     $logo = null;
     $banner = null;
     $email = (isset($_POST['email']) ? filter_var($_POST['email'], FILTER_SANITIZE_EMAIL) : null);
-    $telefono = (isset($_POST['telefono']) ? filter_var($_POST['telefono'], FILTER_SANITIZE_STRING) : null);
-    $atencion = (isset($_POST['atencion']) ? filter_var($_POST['atencion'], FILTER_SANITIZE_STRING) : null);
-    $direccion = (isset($_POST['direccion']) ? filter_var($_POST['direccion'], FILTER_SANITIZE_STRING) : null);
-    $whatsapp = (isset($_POST['whatsapp']) ? filter_var($_POST['whatsapp'], FILTER_SANITIZE_STRING) : null);
-    $instagram = (isset($_POST['instagram']) ? filter_var($_POST['instagram'], FILTER_SANITIZE_STRING) : null);
-    $facebook = (isset($_POST['facebook']) ? filter_var($_POST['facebook'], FILTER_SANITIZE_STRING) : null);
-    $twitter = (isset($_POST['twitter']) ? filter_var($_POST['twitter'], FILTER_SANITIZE_STRING) : null);
-    $aumento_1 = (isset($_POST['aumento_1']) ? filter_var($_POST['aumento_1'], FILTER_SANITIZE_STRING) : null);
-    $minimo = (isset($_POST['minimo']) ? filter_var($_POST['minimo'], FILTER_SANITIZE_STRING) : null);
+    $telefono = (isset($_POST['telefono']) ? filter_var($_POST['telefono'], FILTER_UNSAFE_RAW) : null);
+    $atencion = (isset($_POST['atencion']) ? filter_var($_POST['atencion'], FILTER_UNSAFE_RAW) : null);
+    $direccion = (isset($_POST['direccion']) ? filter_var($_POST['direccion'], FILTER_UNSAFE_RAW) : null);
+    $whatsapp = (isset($_POST['whatsapp']) ? filter_var($_POST['whatsapp'], FILTER_UNSAFE_RAW) : null);
+    $instagram = (isset($_POST['instagram']) ? filter_var($_POST['instagram'], FILTER_UNSAFE_RAW) : null);
+    $facebook = (isset($_POST['facebook']) ? filter_var($_POST['facebook'], FILTER_UNSAFE_RAW) : null);
+    $twitter = (isset($_POST['twitter']) ? filter_var($_POST['twitter'], FILTER_UNSAFE_RAW) : null);
+    $aumento_1 = (isset($_POST['aumento_1']) ? filter_var($_POST['aumento_1'], FILTER_UNSAFE_RAW) : null);
+    $minimo = (isset($_POST['minimo']) ? filter_var($_POST['minimo'], FILTER_UNSAFE_RAW) : null);
     $descuentos = (isset($_POST['descuentos']) ? $_POST['descuentos'] : null);
+    $show_prices = (isset($_POST['show_prices']) ? $_POST['show_prices'] : null);
 
     
     try {
@@ -559,6 +560,7 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'operationC
         $general->aumento_1 = $aumento_1;
         $general->minimo = $minimo;
         $general->descuentos = $descuentos;
+        $general->show_prices = $show_prices == '1' ? 1 : 0;
         $general->update();
         die('true');
 
@@ -572,7 +574,7 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'operationC
  */
 if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'dataCateg') {
 
-    $id_categ = (isset($_POST['id_categ']) ? filter_var($_POST['id_categ'], FILTER_VALIDATE_INT) : null);
+    $id_categ = (isset($_POST['id_categ']) ? filter_var($_POST['id_categ'], FILTER_UNSAFE_RAW) : null);
     
     if ( $id_categ ) {
         $categ = new Categorias($id_categ);
@@ -588,12 +590,12 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'dataCateg'
  */
 if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'operationCateg') {
 
-    $type   = (isset($_POST['type'])  ? filter_var($_POST['type'], FILTER_SANITIZE_STRING) : null);
-    $order  = (isset($_POST['order']) ? filter_var($_POST['order'], FILTER_VALIDATE_INT) : null);
-    $title  = (isset($_POST['title']) ? filter_var($_POST['title'], FILTER_SANITIZE_STRING) : null);
-    $link   = (isset($_POST['link'])  ? filter_var($_POST['link'], FILTER_SANITIZE_STRING) : null);
-    //$color   = (isset($_POST['color'])  ? filter_var($_POST['color'], FILTER_SANITIZE_STRING) : null);
-    $id_categ = (isset($_POST['id_categ']) ? filter_var($_POST['id_categ'], FILTER_VALIDATE_INT) : null);
+    $type   = (isset($_POST['type'])  ? filter_var($_POST['type'], FILTER_UNSAFE_RAW) : null);
+    $order  = (isset($_POST['order']) ? filter_var($_POST['order'], FILTER_UNSAFE_RAW) : null);
+    $title  = (isset($_POST['title']) ? filter_var($_POST['title'], FILTER_UNSAFE_RAW) : null);
+    $link   = (isset($_POST['link'])  ? filter_var($_POST['link'], FILTER_UNSAFE_RAW) : null);
+    //$color   = (isset($_POST['color'])  ? filter_var($_POST['color'], FILTER_UNSAFE_RAW) : null);
+    $id_categ = (isset($_POST['id_categ']) ? filter_var($_POST['id_categ'], FILTER_UNSAFE_RAW) : null);
     $response  = 0;
 
     if(isset($_FILES['file']['name'])){
@@ -652,7 +654,7 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'operationC
  */
 if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'updateCart') {
     
-    $Id_Pedido = isset($_POST['Id_Pedido']) ? filter_var($_POST['Id_Pedido'], FILTER_VALIDATE_INT) : null;
+    $Id_Pedido = isset($_POST['Id_Pedido']) ? filter_var($_POST['Id_Pedido'], FILTER_UNSAFE_RAW) : null;
     $data = "<div>No se encontró el pedido</div>";
 
     if ( $Id_Pedido ) :
@@ -671,7 +673,7 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'updateCart
  */
 if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'dataOrders') {
 
-    $Id_Pedido = isset($_POST['Id_Pedido']) ? filter_var($_POST['Id_Pedido'], FILTER_VALIDATE_INT) : null;
+    $Id_Pedido = isset($_POST['Id_Pedido']) ? filter_var($_POST['Id_Pedido'], FILTER_UNSAFE_RAW) : null;
     $data = "<div>No se encontró el pedido</div>";
 
     if ( $Id_Pedido ) : 
@@ -693,13 +695,13 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'dataOrders
  */
 if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'sendContact') {
 
-    $name    = (isset($_POST['name'])       ? filter_var($_POST['name'],    FILTER_SANITIZE_STRING) : null);
+    $name    = (isset($_POST['name'])       ? filter_var($_POST['name'],    FILTER_UNSAFE_RAW) : null);
     $email   = (isset($_POST['email'])      ? filter_var($_POST['email'],   FILTER_SANITIZE_EMAIL)  : null);
-    $message = (isset($_POST['message'])    ? filter_var($_POST['message'], FILTER_SANITIZE_STRING) : null);
-    $state   = (isset($_POST['state'])      ? filter_var($_POST['state'],   FILTER_SANITIZE_STRING) : null);      
-    $locality = (isset($_POST['locality'])  ? filter_var($_POST['locality'], FILTER_SANITIZE_STRING) : null);
-    $address = (isset($_POST['address'])    ? filter_var($_POST['address'], FILTER_SANITIZE_STRING) : null);
-    $phone   = (isset($_POST['phone'])      ? filter_var($_POST['phone'],   FILTER_SANITIZE_STRING) : null);
+    $message = (isset($_POST['message'])    ? filter_var($_POST['message'], FILTER_UNSAFE_RAW) : null);
+    $state   = (isset($_POST['state'])      ? filter_var($_POST['state'],   FILTER_UNSAFE_RAW) : null);      
+    $locality = (isset($_POST['locality'])  ? filter_var($_POST['locality'], FILTER_UNSAFE_RAW) : null);
+    $address = (isset($_POST['address'])    ? filter_var($_POST['address'], FILTER_UNSAFE_RAW) : null);
+    $phone   = (isset($_POST['phone'])      ? filter_var($_POST['phone'],   FILTER_UNSAFE_RAW) : null);
 
     if ( $name && $email && $message ) {
         $contact = new Contact();
