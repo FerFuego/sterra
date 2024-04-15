@@ -34,7 +34,7 @@
                 justify-content: space-between;
 
                 &:hover {
-                    color: #7fad39;
+                    color: $primary-color;
                 }
     
                 span {
@@ -67,7 +67,7 @@
                     display: flex;
                     position: relative;
                     &:hover {
-                        color: #7fad39;
+                        color: $primary-color;
                     }
                 }
             }
@@ -268,21 +268,21 @@
 
 .sidebar-cpanel {
     .sidebar-container {
-        background-color: #7fad39;
+        background-color: $primary-color;
         height: 100%;
         ul {
             li {
                 a {
-                    color: #fff !important;
+                    color: $white-color !important;
                     font-weight: 600;
                     padding-right: 15px;
                     padding-left: 15px;
                 }
                 &:hover {
-                    background-color: rgba(#000, .2);
+                    background-color: rgba($black-color, .2);
                 }
                 .active {
-                    background-color: rgba(#000, .2);
+                    background-color: rgba($black-color, .2);
                 }
             }
         }

@@ -22,7 +22,7 @@ endif; ?>
 <!-- Slider End -->
 
 <!-- Banner Shopping Begin -->
-<?php require_once('inc/parts/banner-shopping.php'); ?>
+<?php //require_once('inc/parts/banner-shopping.php'); ?>
 <!-- Banner End -->
 
 <!-- Banner Begin -->
@@ -30,7 +30,7 @@ endif; ?>
 <!-- Banner End -->
 
 <!-- Categories Section Begin -->
-<?php require_once('inc/parts/categories-section.php'); ?>
+<?php //require_once('inc/parts/categories-section.php'); ?>
 <!-- Categories Section End -->
 
 <!-- Featured Section Begin -->

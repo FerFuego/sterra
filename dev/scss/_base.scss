@@ -180,12 +180,12 @@ ol {
 
 .site-btn-min {
   font-size: 14px;
-  color: #ffffff;
+  color: $white-color;
   font-weight: 800;
   text-transform: uppercase;
   display: inline-block;
   padding: 4px 17px;
-  background: #7fad39;
+  background: $primary-color;
   border: none;
   height: 28px;
 }
@@ -198,7 +198,7 @@ ol {
   top: 0;
   left: 0;
   z-index: 999999;
-  background: #000;
+  background: $black-color;
 }
 
 .loader {
