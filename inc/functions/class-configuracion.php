@@ -56,6 +56,7 @@ class Configuracion {
     }
 
     public function showPrices(){
+        if ( isset($_SESSION['user']) ) return true;
         return $this->show_prices;
     }
 
