@@ -83,7 +83,7 @@ class Contact {
         $mail->AddReplyTo($emailDestino2); // Copia 2 para el vendedor.
         //$mail->AddAddress($user->getMail()); // Copia para el cliente.
         //$mail->AltBody = "{$mensaje} \n\n Formulario de ejemplo Web Polirrubros"; // Texto sin formato HTML
-        $mail->Subject = "Nuestro Polirrubros - Contacto desde la web"; // Este es el titulo del email.
+        $mail->Subject = "$nombre - Contacto desde la web"; // Este es el titulo del email.
         $mail->Body = " 
         <html>
         <head>
