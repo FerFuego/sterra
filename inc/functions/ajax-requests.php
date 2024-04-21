@@ -506,6 +506,7 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'operationC
     $minimo = (isset($_POST['minimo']) ? filter_var($_POST['minimo'], FILTER_UNSAFE_RAW) : null);
     $descuentos = (isset($_POST['descuentos']) ? $_POST['descuentos'] : null);
     $show_prices = (isset($_POST['show_prices']) ? $_POST['show_prices'] : null);
+    $show_instagram = (isset($_POST['show_instagram']) ? $_POST['show_instagram'] : null);
 
     
     try {
@@ -561,6 +562,7 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'operationC
         $general->minimo = $minimo;
         $general->descuentos = $descuentos;
         $general->show_prices = $show_prices == '1' ? 1 : 0;
+        $general->show_instagram = $show_instagram == '1' ? 1 : 0;
         $general->update();
         die('true');
 

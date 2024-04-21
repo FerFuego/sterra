@@ -20,6 +20,7 @@ class Configuracion {
     public $minimo;
     public $descuentos;
     public $show_prices;
+    public $show_instagram;
     protected $obj;
 
     
@@ -44,11 +45,12 @@ class Configuracion {
         $this->minimo = $row['minimo'];
         $this->descuentos = $row['descuentos'];
         $this->show_prices = $row['show_prices'];
+        $this->show_instagram = $row['show_instagram'];
 	}
 
     public function update() {
         $this->obj = new sQuery();
-        $this->obj->executeQuery("UPDATE configuracion SET id = '$this->id', logo = '$this->logo', banner = '$this->banner', telefono = '$this->telefono', email = '$this->email', direccion = '$this->direccion', atencion = '$this->atencion', whatsapp = '$this->whatsapp', facebook = '$this->facebook', instagram = '$this->instagram', twitter = '$this->twitter', aumento_1 = '$this->aumento_1', minimo = '$this->minimo', descuentos = '$this->descuentos', show_prices = $this->show_prices  WHERE (id = '1')");
+        $this->obj->executeQuery("UPDATE configuracion SET id = '$this->id', logo = '$this->logo', banner = '$this->banner', telefono = '$this->telefono', email = '$this->email', direccion = '$this->direccion', atencion = '$this->atencion', whatsapp = '$this->whatsapp', facebook = '$this->facebook', instagram = '$this->instagram', twitter = '$this->twitter', aumento_1 = '$this->aumento_1', minimo = '$this->minimo', descuentos = '$this->descuentos', show_prices = $this->show_prices, show_instagram = $this->show_instagram  WHERE (id = '1')");
     }
 
     public function getLogo(){
