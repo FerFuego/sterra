@@ -81,7 +81,7 @@
                         $data = array_reverse($data);
                         $descuento = 0;
                         $PctDescuento = 0;
-                        if (!empty($data)) :
+                        if (!empty($data) && count($data) > 1) :
                             foreach ($data as $key => $value) { 
                                 if ($pedido->getTotalFinal() >  $value['precio']) :
                                     $descuento = $pedido->getTotalFinal() * $value['descuento'] / 100;
