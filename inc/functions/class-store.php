@@ -94,6 +94,7 @@ Class Store {
         // Construyo el Cuerpo del Mail.
         $body = "<h2>{$nombre}</h2>
                 <br>
+                <p>
                 {$direccion}<br>
                 Tel.: {$telefono} | WhatsApp: {$whatsapp} | E-Mail: 
                 <a href='mailto:{$email}'>{$email}</a>
