@@ -47,13 +47,9 @@
             <h2>Valores</h2><hr>
             <p>Lorem ipsum dolor sit ameeet consectetur adipisicing elit. Repellendus, quidem. Magni, voluptas. Magnam, voluptate?</p>
             <p>Lorem ipsum dolor sit ameeet consectetur adipisicing elit. Repellendus, quidem. Magni, voluptas. Magnam, voluptate?</p>
-            <p>Lorem ipsum dolor sit ameeet consectetur adipisicing elit. Repellendus, quidem. Magni, voluptas. Magnam, voluptate?</p>
         </div>
     </div>
 </div>
-
-
-
 
 <!-- Footer Section Begin -->
 <?php require_once('inc/layout/footer.php'); ?>
