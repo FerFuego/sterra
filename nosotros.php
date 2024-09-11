@@ -35,18 +35,13 @@
 
         <div class="col-12">
             <h2>Misión</h2><hr>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus, quidem. Magni, voluptas. Magnam, voluptate?</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus, quidem. Magni, voluptas. Magnam, voluptate?</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus, quidem. Magni, voluptas. Magnam, voluptate?</p>
+            <p>Muy pronto...</p>
 
             <h2>Visión</h2><hr>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus, quidem. Magni, voluptas. Magnam, voluptate?</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus, quidem. Magni, voluptas. Magnam, voluptate?</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus, quidem. Magni, voluptas. Magnam, voluptate?</p>
+            <p>Muy pronto...</p>
 
             <h2>Valores</h2><hr>
-            <p>Lorem ipsum dolor sit ameeet consectetur adipisicing elit. Repellendus, quidem. Magni, voluptas. Magnam, voluptate?</p>
-            <p>Lorem ipsum dolor sit ameeet consectetur adipisicing elit. Repellendus, quidem. Magni, voluptas. Magnam, voluptate?</p>
+            <p>Muy pronto...</p>
         </div>
     </div>
 </div>
