@@ -24,24 +24,15 @@
 
         <div class="col-xs-12 col-sm-6">
             <h2>Acerca de Nosotros</h2><hr>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatum, hic quis. Enim voluptatem voluptas dolore quod deserunt ab beatae minus, molestias rerum maiores sed delectus, dolores esse culpa mollitia optio.</p>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatum, hic quis. Enim voluptatem voluptas dolore quod deserunt ab beatae minus, molestias rerum maiores sed delectus, dolores esse culpa mollitia optio.</p>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatum, hic quis. Enim voluptatem voluptas dolore quod deserunt ab beatae minus, molestias rerum maiores sed delectus, dolores esse culpa mollitia optio.</p>
+            <p>Desde el 16 de setiembre de 1994 nos dedicamos a comercializar productos para consumo familiar con despachos en locales al público.</p>
+            <p>Pasando los años, en 1999 empezamos con distribución de productos de pirotecnia en nuestra zona. Viendo el crecimiento de nuestro negocio decidimos ampliar y llegamos a siete provincias del país. Luego agregamos a nuestra distribución productos de cotillón, aerosoles, golosinas, cigarrillos, luces y varios productos más.</p>
+            <p>Ya pasando los años y cambiando la tecnología, decidimos empezar a publicar nuestros productos por nuestra página.</p>
+            <p>Hoy nos sentimos orgullosos de llegar a gran parte del país y facilitar a nuestros clientes el sistema de compras. </p>
+            <p>Gracias a todos por acompañarnos estos 30 años.</p>
         </div>
 
         <div class="col-xs-12 col-sm-6">
             <img class="mt-5 pt-3 pb-3" src="img/empresa.jpg" alt="nosotros">
-        </div>
-
-        <div class="col-12">
-            <h2>Misión</h2><hr>
-            <p>Muy pronto...</p>
-
-            <h2>Visión</h2><hr>
-            <p>Muy pronto...</p>
-
-            <h2>Valores</h2><hr>
-            <p>Muy pronto...</p>
         </div>
     </div>
 </div>
