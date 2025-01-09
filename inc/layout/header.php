@@ -4,7 +4,7 @@
 <div class="humberger__menu__wrapper">
 
     <div class="humberger__menu__logo">
-        <a href="/"><img src="img/logo.jpg" alt=""></a>
+        <a href="/"><img src="img/logo.png" alt=""></a>
     </div>
 
     
