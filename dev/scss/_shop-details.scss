@@ -207,6 +207,10 @@
     padding-right: 0;
     text-align: center;
     width: 50%;
+
+    @media (max-width: 767px) {
+        width: 90%;
+    }
 }
 
 .product__details__tab {
