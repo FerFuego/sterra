@@ -101,9 +101,9 @@
                                     <li><b>SubRubro</b> <span><?php echo ucfirst(strtolower($product->subrubro)); ?></span></li>
                                 <?php endif; ?>
                                 
-                                <?php if ($product->grupo) : ?>
-                                    <li><b>Grupo</b> <span><?php echo ucfirst(strtolower($product->grupo)); ?></span></li>
-                                <?php endif; ?>
+                                <?php //if ($product->grupo) : ?>
+                                    <!-- <li><b>Grupo</b> <span><?php //echo ucfirst(strtolower($product->grupo)); ?></span></li> -->
+                                <?php //endif; ?>
 
                                 <li><b>Disponibilidad</b> <span>Hay Stock</span></li>
 
