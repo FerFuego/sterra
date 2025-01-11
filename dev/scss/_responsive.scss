@@ -1,9 +1,4 @@
 /*--------------------------------- Responsive Media Quaries -----------------------------*/
-.col-xs-6 {
-  flex: 0 0 50%;
-  max-width: 50%;
-  padding: 0 10px;
-}
 @media only screen and (min-width: 1200px) {
     .container {
       max-width: 1170px;
@@ -320,6 +315,11 @@
   
   /* Wide Mobile = 480px */
   @media only screen and (max-width: 767px) {
+    .col-xs-6 {
+      flex: 0 0 50%;
+      max-width: 50%;
+      padding: 0 10px;
+    }
     .hero__categories {
       margin-bottom: 30px;
     }
