@@ -315,6 +315,10 @@
         display: block;
         margin-bottom: 4px;
     }
+
+    @media screen and (max-width: 767px) {
+        margin-bottom: 20px;
+    }
 }
 
 .product__item__pic {
