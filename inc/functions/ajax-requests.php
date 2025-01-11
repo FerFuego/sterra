@@ -74,7 +74,8 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'getSubRubr
 
     while ( $row = $result->fetch_object() ) {
         $html .= '<div>';
-        $html .= '<a href="productos.php?id_rubro='. $row->Id_Rubro.'&id_subrubro='.$row->Id_SubRubro.'" class="item sub-item lastlistCTA '. $row->Id_SubRubro .'" data-subrubro="'. $row->Id_SubRubro .'">'. $row->Nombre .'<span onclick="loadGroupCategory('. $row->Id_SubRubro .')"></span></a>';
+        //$html .= '<a href="productos.php?id_rubro='. $row->Id_Rubro.'&id_subrubro='.$row->Id_SubRubro.'" class="item sub-item lastlistCTA '. $row->Id_SubRubro .'" data-subrubro="'. $row->Id_SubRubro .'">'. $row->Nombre .'<span onclick="loadGroupCategory('. $row->Id_SubRubro .')"></span></a>';
+        $html .= '<a href="productos.php?id_rubro='. $row->Id_Rubro.'&id_subrubro='.$row->Id_SubRubro.'" class="item sub-item lastlistCTA '. $row->Id_SubRubro .'" data-subrubro="'. $row->Id_SubRubro .'">'. $row->Nombre .'</a>';
         $html .= '<div class="lastlist lastlist_'. $row->Id_SubRubro .'"></div>';
         $html .= '</div>';
     }
