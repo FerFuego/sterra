@@ -340,19 +340,22 @@
     }
   
     .categories__slider.owl-carousel .owl-nav {
+      display: flex;
+      justify-content: space-between;
       text-align: center;
-      margin-top: 40px;
+      margin-top: 10px;
+      position: absolute;
+      top: 40%;
+      width: 100%;
     }
   
     .categories__slider.owl-carousel .owl-nav button {
-      position: relative;
-      left: 0;
-      top: 0;
+      left: 15px;
       -webkit-transform: translateY(0);
     }
   
     .categories__slider.owl-carousel .owl-nav button.owl-next {
-      right: -10px;
+      right: 15px;
     }
   
     .footer__copyright {

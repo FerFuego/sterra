@@ -26,7 +26,7 @@ endif; ?>
 <!-- Banner End -->
 
 <!-- Banner Begin -->
-<?php require_once('inc/parts/banner-section.php'); ?>
+<?php //require_once('inc/parts/banner-section.php'); ?>
 <!-- Banner End -->
 
 <!-- Categories Section Begin -->
