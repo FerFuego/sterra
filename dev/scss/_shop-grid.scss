@@ -385,6 +385,11 @@
         a {
             color: $heading-color-2;
         }
+
+        @media (max-width: 767px) {
+            font-size: 12px;
+            padding: 0 10px;
+        }
     }
 
     h5 {

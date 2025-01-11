@@ -1,4 +1,4 @@
-<div class="col-lg-4 col-md-6 col-sm-6">
+<div class="col-lg-4 col-md-6 col-sm-6 col-xs-6">
     <div class="product__item">
         <div class="product__item__pic set-bg" data-setbg="<?php echo Productos::getImage( $product->CodProducto ); ?>">
             <!-- <div class="product__discount__percent">-20%</div> -->
