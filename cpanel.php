@@ -26,6 +26,9 @@
                     case 'importar':
                         require_once('inc/parts/cpanel/import.php');
                         break;
+                    case 'importar_rub':
+                        require_once('inc/parts/cpanel/import_rub.php');
+                        break;
                     case 'productos':
                         require_once('inc/parts/cpanel/products.php');
                         break;

@@ -73,7 +73,7 @@
             <hr>
             <div class="d-flex">
                 <div class="form-group w-100 pl-2">
-                    <label for="telefono">Telefono</label> <br>
+                    <label for="telefono">Teléfono</label> <br>
                     <input type="text" name="telefono" id="telefono" class="form-control" value="<?php echo $general->telefono; ?>">
                 </div>
                 <div class="form-group w-100 pl-2">
@@ -81,13 +81,13 @@
                     <input type="text" name="email" id="email" class="form-control" value="<?php echo $general->email; ?>">
                 </div>
                 <div class="form-group w-100 pl-2">
-                    <label for="atencion">Atencion</label> <br>
+                    <label for="atencion">Atención</label> <br>
                     <input type="text" name="atencion" id="atencion" class="form-control" value="<?php echo $general->atencion; ?>">
                 </div>
             </div>
             <div class="d-flex">
                 <div class="form-group w-100 pl-2">
-                    <label for="direccion">Direccion</label> <br>
+                    <label for="direccion">Dirección</label> <br>
                     <input type="text" name="direccion" id="direccion" class="form-control" value="<?php echo $general->direccion; ?>">
                 </div>
                 <div class="form-group w-100 pl-2">
@@ -130,7 +130,7 @@
             <div class="d-flex">
                 <div class="form-group w-100 pl-2">
                     <br>
-                    <label for="aumento_1">Minimo de Compra</label> 
+                    <label for="aumento_1">Mínimo de Compra</label> 
                 </div>
                 <div class="form-group w-100 pl-2">
                     <label for="aumento_1">Pesos ($)</label> <br>
@@ -143,17 +143,17 @@
                     <label for="aumento_1">Mostrar Precios en la tienda implica que los usuarios puedan realizar pedidos sin iniciar sesión.</label> 
                 </div>
                 <div class="form-group w-100 pl-2">
-                    <label for="aumento_1">Marcada = Mostras / Desmarcada = Ocultar</label> <br>
+                    <label for="aumento_1">Marcada = Mostrar / Desmarcada = Ocultar</label> <br>
                     <input type="checkbox" name="show_prices" id="show_prices" value="1" <?php echo $general->show_prices ? 'checked' : ''; ?>>
                 </div>
             </div>
             <div class="d-flex">
                 <div class="form-group w-100 pl-2">
                     <br>
-                    <label for="show_instagram">Mostrar Instagram en la tienda implica mostrar una seccion en la home con la seccion de Instagram <span class="text-danger">(necesita tener una cuenta y estar seteada en el campo instagram).</span></label> 
+                    <label for="show_instagram">Mostrar Instagram en la tienda implica mostrar una sección en la home con la sección de Instagram <span class="text-danger">(necesita tener una cuenta y estar seteada en el campo instagram).</span></label> 
                 </div>
                 <div class="form-group w-100 pl-2">
-                    <label for="show_instagram">Marcada = Mostras / Desmarcada = Ocultar</label> <br>
+                    <label for="show_instagram">Marcada = Mostrar / Desmarcada = Ocultar</label> <br>
                     <input type="checkbox" name="show_instagram" id="show_instagram" value="1" <?php echo $general->show_instagram ? 'checked' : ''; ?>>
                 </div>
             </div>
@@ -218,7 +218,7 @@
         <thead>
             <tr class="bg-dark text-white">
                 <th colspan="2">
-                    Historico de Pedidos - <?php echo date('Y'); ?>
+                    Histórico de Pedidos - <?php echo date('Y'); ?>
                 </th>
             </tr>
             <tr class="bg-light">

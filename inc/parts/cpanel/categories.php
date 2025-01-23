@@ -1,6 +1,6 @@
 <div class="shoping__cart__table">
     <div class="d-flex justify-content-between mb-2">
-        <button data-toggle="modal" onclick="cleanCategModal();" data-target="#categModal" class="site-btn mb-2">Nueva Categoria</button>
+        <button data-toggle="modal" onclick="cleanCategModal();" data-target="#categModal" class="site-btn mb-2">Nueva Categoría</button>
     </div>
     <table class="table table-bordered table-striped">
         <thead>
@@ -25,7 +25,7 @@
                     endwhile;
                 else : ?>
                     <tr>
-                        <td colspan="6"><h3>No existen categorias</h3></td>
+                        <td colspan="6"><h3>No existen categorías</h3></td>
                     </tr>
                 <?php endif; ?>
         </tbody>

@@ -222,6 +222,17 @@ class Productos {
         }
     }
 
+    public function importRub_SRub_Gru($sql) {
+        try {
+            $this->obj = new sQuery();
+            $this->obj->executeQuery("DELETE FROM `grupos` WHERE 1; DELETE FROM `subrubros` WHERE 1; DELETE FROM `rubros` WHERE 1;");
+            $this->obj->executeQuery($sql);
+            return $this->obj->getResultados();
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
     public function update() {
         $this->obj = new sQuery();
         $this->obj->executeQuery("UPDATE productos SET Nombre = '$this->nombre', Novedad = '$this->novedad', Oferta = '$this->oferta', Observaciones = '$this->observaciones' WHERE (CodProducto = '$this->cod_producto')");

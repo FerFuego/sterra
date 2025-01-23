@@ -1,9 +1,9 @@
 <div class="row">
     <div class="col-sm-12 col-md-6">
-        <h2>Importar Productos</h2>
-        <form action="/cpanel.php?opcion=importar" method="post" enctype="multipart/form-data" name="frmImportar">
+        <h2>Importar Rubros, SubRubros y Grupos de Productos</h2>
+        <form action="/cpanel.php?opcion=importar_rub" method="post" enctype="multipart/form-data" name="frmImportar">
             <div class="form-group">
-                <label for="fileSQL">Seleccione archivo para importar los productos</label>
+                <label for="fileSQL">Seleccione archivo para importar los rubros, subrubros y grupos</label>
                 <input type="file" name="fileSQL" id="fileSQL" class="form-control" accept="text/plain" required>
             </div>
 
@@ -20,10 +20,10 @@
             $sql = utf8_encode($sql);
 
             $productos = new Productos();
-            $result = $productos->importProducts($sql);
+            $result = $productos->importRub_SRub_Gru($sql);
             
             if (is_integer($result) && $result > 1) : ?>
-                <p class="text-success"><?php echo $result; ?> Productos Importados Correctamente!</p>
+                <p class="text-success"><?php echo $result; ?> Rubros, SubRubros y Grupos Importados Correctamente!</p>
             <?php else : ?>
                 <p class="text-danger">Ocurrió un error en la importación. <?php echo $result; ?></p>
             <?php endif;
