@@ -225,12 +225,21 @@ class Productos {
     public function importRub_SRub_Gru($sql) {
         try {
             $this->obj = new sQuery();
+    
+            // Vaciar las tablas
             $this->obj->executeQuery("DELETE FROM `grupos` WHERE 1;");
-            $this->obj->executeQuery($sql);
             $this->obj->executeQuery("DELETE FROM `subrubros` WHERE 1;");
-            $this->obj->executeQuery($sql);
             $this->obj->executeQuery("DELETE FROM `rubros` WHERE 1;");
-            $this->obj->executeQuery($sql);
+    
+            // Dividir el SQL en inserciones individuales
+            $insertQueries = preg_split('/;+(?![^(]*\))/', $sql);
+            foreach ($insertQueries as $query) {
+                $query = trim($query);
+                if (!empty($query)) {
+                    $this->obj->executeQuery($query);
+                }
+            }
+    
             return $this->obj->getResultados();
         } catch (Exception $e) {
             return $e->getMessage();
