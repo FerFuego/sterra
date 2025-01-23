@@ -225,7 +225,11 @@ class Productos {
     public function importRub_SRub_Gru($sql) {
         try {
             $this->obj = new sQuery();
-            $this->obj->executeQuery("DELETE FROM `grupos` WHERE 1; DELETE FROM `subrubros` WHERE 1; DELETE FROM `rubros` WHERE 1;");
+            $this->obj->executeQuery("DELETE FROM `grupos` WHERE 1;");
+            $this->obj->executeQuery($sql);
+            $this->obj->executeQuery("DELETE FROM `subrubros` WHERE 1;");
+            $this->obj->executeQuery($sql);
+            $this->obj->executeQuery("DELETE FROM `rubros` WHERE 1;");
             $this->obj->executeQuery($sql);
             return $this->obj->getResultados();
         } catch (Exception $e) {
