@@ -43,7 +43,7 @@
                 <?php
                 $general = new Configuracion();
                 $data = json_decode($general->getDescuentos(), true);
-                if (!empty($data[0])) : ?>
+                if (!empty($data[0]) && !isset($_SESSION['user'])): ?>
                     <div class="shoping__discount shoping__checkout mt-0">
                         <h5>Tabla de Descuentos</h5>
                         <table class="table table-bordered">
@@ -78,7 +78,7 @@
                         $data = array_reverse($data);
                         $descuento = 0;
                         $PctDescuento = 0;
-                        if (!empty($data[0])) :
+                        if (!empty($data[0])  && !isset($_SESSION['user'])) :
                             foreach ($data as $key => $value) { 
                                 if ($pedido->getTotalFinal() >  $value['precio']) :
                                     $descuento = $pedido->getTotalFinal() * $value['descuento'] / 100;
@@ -100,14 +100,14 @@
                 <input type="hidden" name="total" value="<?php echo $pedido->getTotalFinal() - $descuento; ?>">
                  
                 <!-- Danger Bootstrap -->
-                 <?php if ($pedido->getTotalFinal() < $general->getMinimo()) : ?>
+                 <?php if ($pedido->getTotalFinal() < $general->getMinimo() && !isset($_SESSION['user'])) : ?>
                     <div class="alert alert-danger" role="alert">
                         <i class="fa fa-exclamation-circle"></i> El minimo de compra para cerrar el pedido es de <strong>$<?php echo number_format($general->getMinimo(), 0,'','.'); ?></strong>
                     </div>
                 <?php endif; ?>
                 
                 <!-- Final Order -->
-                <?php if (!$result['cpanel'] && $pedido->getTotalFinal() >= $general->getMinimo()) : ?>
+                <?php if ((!$result['cpanel'] && $pedido->getTotalFinal() >= $general->getMinimo()) || isset($_SESSION['user'])) : ?>
                     <a href="#" id="js-finally-order" data-id="<?php echo $result['Id_Pedido']; ?>" class="primary-btn">Finalizar Pedido</a>
                 <?php endif; ?>
             </div>
