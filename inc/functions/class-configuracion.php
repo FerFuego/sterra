@@ -19,9 +19,10 @@ class Configuracion {
     public $aumento_1;
     public $minimo;
     public $descuentos;
-    public $show_prices;
     public $show_instagram;
+    public $show_prices;
     public $promo_modal;
+    public $active_register;
     protected $obj;
 
     
@@ -45,14 +46,15 @@ class Configuracion {
         $this->aumento_1 = $row['aumento_1'];
         $this->minimo = $row['minimo'];
         $this->descuentos = $row['descuentos'];
-        $this->show_prices = $row['show_prices'];
         $this->show_instagram = $row['show_instagram'];
+        $this->show_prices = $row['show_prices'];
         $this->promo_modal = $row['promo_modal'];
+        $this->active_register = $row['active_register'];
 	}
 
     public function update() {
         $this->obj = new sQuery();
-        $this->obj->executeQuery("UPDATE configuracion SET id = '$this->id', logo = '$this->logo', banner = '$this->banner', telefono = '$this->telefono', email = '$this->email', direccion = '$this->direccion', atencion = '$this->atencion', whatsapp = '$this->whatsapp', facebook = '$this->facebook', instagram = '$this->instagram', twitter = '$this->twitter', aumento_1 = '$this->aumento_1', minimo = '$this->minimo', descuentos = '$this->descuentos', show_prices = $this->show_prices, show_instagram = $this->show_instagram, promo_modal = '$this->promo_modal'  WHERE (id = '1')");
+        $this->obj->executeQuery("UPDATE configuracion SET id = '$this->id', logo = '$this->logo', banner = '$this->banner', telefono = '$this->telefono', email = '$this->email', direccion = '$this->direccion', atencion = '$this->atencion', whatsapp = '$this->whatsapp', facebook = '$this->facebook', instagram = '$this->instagram', twitter = '$this->twitter', aumento_1 = '$this->aumento_1', minimo = '$this->minimo', descuentos = '$this->descuentos', show_instagram = '$this->show_instagram', show_prices = '$this->show_prices', promo_modal = '$this->promo_modal', active_register = '$this->active_register' WHERE (id = '1')");
     }
 
     public function deletePromoBanner() {
@@ -67,6 +69,11 @@ class Configuracion {
     public function showPrices(){
         if ( isset($_SESSION['user']) ) return true;
         return $this->show_prices;
+    }
+
+    public function showLoginPrices(){
+        if ( isset($_SESSION['user']) ) return true;
+        return  false;
     }
 
     public function getAumento(){

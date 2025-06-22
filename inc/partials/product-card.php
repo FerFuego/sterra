@@ -1,9 +1,11 @@
+<?php $prod = new Productos($product->CodProducto); ?>
+
 <div class="col-lg-3 col-md-4 col-sm-6 mix <?php echo Store::get_slug($product->Rubro); ?>">
     <div class="featured__item">
         <div class="featured__item__pic set-bg" data-setbg="<?php echo Productos::getImage( $product->CodProducto ); ?>">
         <!-- <div class="product__discount__percent">-20%</div> -->
         <div class="product__code"><h5><?php echo 'COD: ' . $product->CodProducto; ?></h5></div>
-            <?php if ($general->showPrices()): ?>
+            <?php if ($general->showLoginPrices() && $prod->getStock() > 0 ): ?>
                 <form class="js-form-cart">
                     <input type="hidden" name="id_product" value="<?php echo $product->Id_Producto; ?>">
                     <input type="hidden" name="cod_product" value="<?php echo $product->CodProducto; ?>">
@@ -22,8 +24,12 @@
         <div class="featured__item__text">
             <span><?php echo $product->Rubro; ?></span>
             <h6><a href="detalle.php?id=<?php echo $product->CodProducto; ?>"><?php echo $product->Nombre; ?></a></h6>
+            
             <?php if ($general->showPrices()): ?>
                 <p class="text-danger"><?php echo 'Precio Lista: <strong>$ '. number_format(Productos::PreVtaFinal($product->PreVtaFinal1), 2,',','.') . '</strong>'; ?></p>
+            <?php endif; ?>
+
+            <?php if ($general->showLoginPrices()): ?>
                 <form class="js-form-cart">
                     <input type="hidden" name="id_product" value="<?php echo $product->Id_Producto; ?>">
                     <input type="hidden" name="cod_product" value="<?php echo $product->CodProducto; ?>">
@@ -36,7 +42,7 @@
                     <div class="product__details__quantity mb-2">
                         <div class="quantity">
                             <div class="pro-qty">
-                                <input type="number" name="cant" min="1" max="99999" value="1"> 
+                                <input type="number" name="cant" min="1" max="<?php echo $prod->getStock(); ?>" value="1"> 
                             </div>
                         </div>
                     </div>

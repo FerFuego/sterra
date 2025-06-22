@@ -193,23 +193,40 @@
 		Quantity change
 	--------------------- */
     var proQty = $('.pro-qty');
-    proQty.prepend('<span class="dec qtybtn">-</span>');
-    proQty.append('<span class="inc qtybtn">+</span>');
-    proQty.on('click', '.qtybtn', function () {
-        var $button = $(this);
-        var oldValue = $button.parent().find('input').val();
-        if ($button.hasClass('inc')) {
-            var newVal = parseFloat(oldValue) + 1;
-        } else {
-            // Don't allow decrementing below zero
-            if (oldValue > 0) {
-                var newVal = parseFloat(oldValue) - 1;
+        proQty.prepend('<span class="dec qtybtn">-</span>');
+        proQty.append('<span class="inc qtybtn">+</span>');
+        proQty.on('click', '.qtybtn', function () {
+            var $button = $(this);
+            var oldValue = $button.parent().find('input').val();
+            var maxVal = $button.parent().find('input').attr('max');
+            if ($button.hasClass('inc')) {
+                var newVal = parseFloat(oldValue) + 1;
+                if (newVal > maxVal) {
+                    newVal = maxVal;
+                }
             } else {
-                newVal = 0;
+                // Don't allow decrementing below zero
+                if (oldValue > 0) {
+                    var newVal = parseFloat(oldValue) - 1;
+                } else {
+                    newVal = 0;
+                }
             }
+            $button.parent().find('input').val(newVal);
+        });
+        
+    // Agregar listener para validar ingreso por teclado
+    proQty.find('input').on('input', function () {
+        var $input = $(this);
+        var maxValue = $input.attr('max');
+        var value = $input.val();
+        if (value > maxValue) {
+            $input.val(maxValue);
+        } else if (value < 0) {
+            $input.val(0);
         }
-        $button.parent().find('input').val(newVal);
     });
+
 
 })(jQuery);
 
@@ -376,6 +393,7 @@ $(document).ready( function () {
             formData.append('action', 'actionLogin');
             formData.append('user', values.user );
             formData.append('pass', values.pass );
+            formData.append('csrf', values.csrf );
             formData.append('g-recaptcha-response', values['g-recaptcha-response'] );
     
         jQuery.ajax({
@@ -389,31 +407,42 @@ $(document).ready( function () {
                 $('.js-login-message').html('<p>Validando...</p>');
             },
             success: function (response) {
-
-                var data = JSON.parse(response);
-                toastr.success('Pedido Actualizado Correctamente.');
-
-                if (data.updated.updated > 0) {
-                    toastr.info(data.updated.updated + ' Productos Actualizados');
-                }
-                
-                if (data.updated.deleted > 0) {
-                    toastr.info(data.updated.deleted + ' Productos Eliminados');
-                }
-
                 setTimeout(function () {
+                    var data = JSON.parse(response);
+
                     if (data.login == 'true') {
+
+                        toastr.success('Pedido Actualizado Correctamente.');
+        
+                        if (data.updated.updated > 0) {
+                            toastr.info(data.updated.updated + ' Productos Actualizados');
+                        }
+                        
+                        if (data.updated.deleted > 0) {
+                            toastr.info(data.updated.deleted + ' Productos Eliminados');
+                        }
+
                         $('.js-login-message').html('<small class="text-success">Usuario Validado, Redireccionando...</small>');
-                        location.reload();
+                        
+                        setTimeout(function() {
+                            location.reload();
+                        }, 2000);
+
                     } else if (data.login == 'admin') {
+
                         $('.js-login-message').html('<small class="text-success">Usuario Validado, Redireccionando...</small>');
+                        
                         location.href = 'cpanel.php';
+
                     } else if (data.login == 'Captcha Incorrecto!') {
+
                         $('.js-login-message').html('<small class="text-danger">'+data.login+'</small>');
+
                     } else {
+
                         $('.js-login-message').html('<small class="text-danger">Usuario o contrseña Incorrecto!</small>');
                     }
-                }, 3000);
+                }, 1000);
             }
         });
     })
@@ -693,6 +722,7 @@ $(document).ready( function () {
             formData.append('minimo', values.minimo);
             formData.append('show_prices', values.show_prices);
             formData.append('show_instagram', values.show_instagram);
+            formData.append('active_register', values.active_register);
             formData.append('descuentos', JSON.stringify(obj));
 
         jQuery.ajax({
@@ -734,14 +764,13 @@ $(document).ready( function () {
         
             var formData = new FormData();
                 formData.append('action', 'operationClient');
+                formData.append('type_cli', values.type_cli);
                 formData.append('type', values.type);
-                formData.append('id', values.id);
                 formData.append('name', values.name);
                 formData.append('locality', values.locality);
                 formData.append('mail', values.mail);
                 formData.append('username', values.username);
                 formData.append('password', values.password);
-                formData.append('price', values.price);
         
             jQuery.ajax({
                 cache: false,
@@ -781,7 +810,7 @@ $(document).ready( function () {
         
             var formData = new FormData();
                 formData.append('action', 'operationClient');
-                formData.append('type', 'delete');
+                formData.append('type_cli', 'delete');
                 formData.append('id', values.id_item);
         
             jQuery.ajax({
@@ -1134,7 +1163,6 @@ $(document).ready( function () {
             });
         })
 });
-
 /*-----------------------
     Show Preview Image
 -----------------------*/
@@ -1235,7 +1263,7 @@ function getClientdata(obj) {
                 $('#mail').val(data.Mail);
                 $('#username').val(data.Usuario);
                 $('#pass_cli').val(data.Password);
-                $('#price').val(data.ListaPrecioDef);
+                $('#type').val(data.tipo).change();
             }
         }
     });
@@ -1491,7 +1519,71 @@ function sendContact() {
 
 })(jQuery);
 
+/*-----------------
+    Delete Rows Table
+------------------*/
 function deleteRow (obj) {
     const row = obj.parentNode.parentNode;
     row.parentNode.removeChild(row);
+}
+
+/*-----------------
+    Add Client
+------------------*/
+$('#js-form-register').submit(addClient);
+
+function addClient() {
+    event.preventDefault();
+
+    var formData = new FormData();
+        formData.append('action', 'registerUser');
+        formData.append('g-recaptcha-response', $('#g-recaptcha-response').val() );
+
+    const data = [
+        'user_name',
+        'user_locality',
+        'email',
+        'user_cli',
+        'pass_cli',
+        'user_csrf'
+    ];
+
+    for (var i = 0; i < data.length; i++) {
+        if ($('#'+data[i]).val() == '') {
+            toastr.error('Todos los campos son obligatorios.');
+            return
+        } else {
+            formData.append(data[i], $('#'+data[i]).val() );
+        }
+    }
+
+    if ($('#user_control').val() !== '') {
+        toastr.error('Ocurrio un error, por favor recarge la pagina e intente nuevamente.');
+        return
+    }
+
+    jQuery.ajax({
+        cache: false,
+        url: 'inc/functions/ajax-requests.php',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+            if (response == 'false' || response == 'undefined') {
+                toastr.error('Ocurrio un error, por favor recarge la pagina e intente nuevamente.');
+            } else if (response == 'false-captcha') {
+                toastr.error('Ocurrio un error, por favor confirma que no eres un robot.');
+            } else {
+                toastr.success('Ya puedes iniciar sesion');
+                toastr.success('Usuario agregado correctamente.');
+                // reset form
+                $('#js-form-register')[0].reset();
+                // redirect
+                setTimeout(function() {
+                    window.location = 'index.php';
+                }, 3000);
+            }
+        }
+    });
 }

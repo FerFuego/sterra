@@ -47,7 +47,10 @@
         <div class="col-lg-6">
             <div class="js-cart-message"></div>
             <div class="shoping__continue">
-                <?php if (!isset($_SESSION['user'])): ?>
+            <?php
+                $general = new Configuracion();
+                $data = json_decode($general->getDescuentos(), true);
+                if (!empty($data)) : ?>
                     <div class="shoping__discount shoping__checkout">
                         <h5>Tabla de Descuentos</h5>
                         <table class="table table-bordered">
@@ -55,22 +58,19 @@
                                 <th>Descuento</th>
                                 <th>&nbsp;&nbsp;Compras</th>
                             </thead>
-                            <?php
-                                $general = new Configuracion();
-                                $data = json_decode($general->getDescuentos(), true);
-                                if (!empty($data)) :
-                                    foreach ($data as $key => $value) { ?>
-                                        <tr>
-                                            <td><?= $value['descuento'] . "%"; ?></td>
-                                            <td>> $<?php echo  number_format($value['precio'], 2,',','.'); ?></td>
-                                        </tr>
-                                    <?php }
-                                endif; 
-                            ?>
+                            
+                            <?php foreach ($data as $key => $value) { ?>
+                                <tr>
+                                    <td><?= $value['descuento'] . "%"; ?></td>
+                                    <td>> $<?php echo  number_format($value['precio'], 2,',','.'); ?></td>
+                                </tr>
+                            <?php } ?>
                         </table>
-                        <div class="alert alert-danger mb-0" role="alert">
-                            <i class="fa fa-exclamation-circle"></i> Si ya sos cliente, ingresa con tu usuario y accede a nuestros descuentos por compra mayorista.
-                        </div>
+                        <?php if (!isset($_SESSION['user'])): ?>
+                            <div class="alert alert-danger mb-0" role="alert">
+                                <i class="fa fa-exclamation-circle"></i> Si ya sos cliente, ingresa con tu usuario y accede a nuestros descuentos por compra mayorista.
+                            </div>
+                        <?php endif; ?>
                         <!-- <form action="#">
                             <input type="text" placeholder="Enter your coupon code">
                             <button type="submit" class="site-btn">APPLY COUPON</button>
@@ -85,7 +85,13 @@
                 <ul>
                     <li>Total <span>$<?php echo number_format($pedido->getTotalFinal(), 2,',','.'); ?></span></li>
                 </ul>
-                <a href="./finalizar-pedido.php" class="primary-btn">Revision Final del Pedido</a>
+                <?php if (!isset($_SESSION['user'])): ?>
+                    <div class="alert alert-danger mb-0" role="alert">
+                        <i class="fa fa-exclamation-circle"></i> Ingresa con tu usuario o registrate para poder realizar pedidos.
+                    </div>
+                <?php else : ?>
+                    <a href="./finalizar-pedido.php" class="primary-btn">Revision Final del Pedido</a>
+                <?php endif; ?>
             </div>
         </div>
     </div>

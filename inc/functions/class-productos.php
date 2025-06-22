@@ -26,6 +26,7 @@ class Productos {
     public $novedad;
     public $oferta;
     public $observaciones;
+    public $StockActual;
     protected $obj;
 
     public function __construct($id=0) {
@@ -58,7 +59,7 @@ class Productos {
             $this->novedad = $row['Novedad'];
             $this->oferta = $row['Oferta'];
             $this->observaciones = $row['Observaciones'];
-
+            $this->StockActual = $row['StockActual'];
         }
     }
 
@@ -68,6 +69,7 @@ class Productos {
     public function getSubRubroID(){ return $this->id_subrubro; }
     public function getGrupoID(){ return $this->id_grupo; }
     public function getNombre(){ return $this->nombre; }
+    public function getStock(){ return $this->StockActual; }
     
     public static function PreVtaFinal($precio){ 
         $config  = new Configuracion();
@@ -76,7 +78,9 @@ class Productos {
         
         // Usuario logueado
         if (isset($_SESSION["user"])) {
-            return $precio;
+            // user recurrente
+            $user = new Usuarios($_SESSION["Id_Cliente"]);
+            if ($user->getTipo() == 1) return $precio;
         } 
         
         // Usuario no logueado o tipo 2
@@ -94,7 +98,9 @@ class Productos {
         
         // Usuario logueado
         if (isset($_SESSION["user"])) {
-            return $this->precio_venta_final_1;
+            // user recurrente
+            $user = new Usuarios($_SESSION["Id_Cliente"]);
+            if ($user->getTipo() == 1) return $this->precio_venta_final_1;
         } 
         
         // Usuario no logueado o tipo 2

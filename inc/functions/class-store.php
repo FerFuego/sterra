@@ -9,6 +9,7 @@ Class Store {
         
         require('autoload.php');
 
+        $this->setTokenSession();
         $this->getItemsSession();
     }
 
@@ -18,6 +19,12 @@ Class Store {
 
     public static function get_site_key() {
         return getenv('SITE_KEY');
+    }
+
+    public static function setTokenSession() {
+        if (!isset($_SESSION["token"])) {
+            $_SESSION["token"] = md5(uniqid(mt_rand(), true));
+        }
     }
 
     public static function normalize_title() {
@@ -82,17 +89,16 @@ Class Store {
     public function getBodyEmail($id_pedido) {
 
         $total = 0;
-        $nombre =  getenv('SMTP_FROM');
         $pedido = new Pedidos($id_pedido);
+        $nombre =  getenv('SMTP_FROM');
         $config = new Configuracion();
         $direccion = $config->direccion;
         $email     = $config->email;
         $telefono  = $config->telefono;
         $whatsapp  = $config->whatsapp;
-
         
         // Construyo el Cuerpo del Mail.
-        $body = "<h2>{$nombre}</h2>
+        $body = "<h2>Pedido {$nombre}</h2>
                 <br>
                 <p>
                 {$direccion}<br>
@@ -178,7 +184,7 @@ Class Store {
         $mail->AddReplyTo($emailDestino); // Esto es para que al recibir el correo y poner Responder, lo haga a la cuenta del vendedor.
         $mail->Subject = "{$nombre} - Pedido: ".$id_pedido; // Este es el titulo del email.
         $mail->Body = "{$cuerpo}"; // Texto del email en formato HTML
-        //$mail->AltBody = "{$mensaje} \n\n Formulario de ejemplo Web Polirrubros"; // Texto sin formato HTML
+        //$mail->AltBody = "{$mensaje} \n\n Formulario de ejemplo Web"; // Texto sin formato HTML
         
         $mail->SMTPOptions = array(
             'ssl' => array(
@@ -216,7 +222,11 @@ Class Store {
         
         // Usuario logueado
         if (isset($_SESSION["user"])) {
-            return number_format($product->PreVtaFinal1(), 2,',','.');
+            // usuario recurrente
+            $user = new Usuarios($_SESSION["Id_Cliente"]);
+            if ($user->getTipo() == 1) {
+                return number_format($product->PreVtaFinal1(), 2,',','.');
+            }
         }
         
         // Usuario no logueado o tipo 2

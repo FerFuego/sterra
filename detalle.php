@@ -59,9 +59,9 @@
                                 <!-- <span>(18 reviews)</span> -->
                             </div>
 
-                            <h4>Cod.: <?php echo $product->getCode(); ?></h4>
+                            <h4>Cód.: <?php echo $product->getCode(); ?></h4>
 
-                            <?php if ($general->showPrices()): ?>
+                            <?php if ($general->showLoginPrices() && $product->getStock() > 0): ?>
                                 <form class="js-form-cart">
                                     <div class="product__details__price">$<?php echo number_format($product->PreVtaFinal1(), 2,',','.'); ?></div>
                                     <input type="hidden" name="id_product" value="<?php echo $product->getID(); ?>">
@@ -76,7 +76,7 @@
                                     <div class="product__details__quantity">
                                         <div class="quantity">
                                             <div class="pro-qty">
-                                                <input type="number" name="cant" min="1" max="99999" value="1"> 
+                                                <input type="number" name="cant" min="1" max="<?php echo $product->getStock(); ?>" value="1"> 
                                             </div>
                                         </div>
                                     </div>
@@ -84,6 +84,10 @@
                                     <input type="submit" class="primary-btn" value="AGREGAR AL CARRITO">
                                     <!-- <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a> -->
                                 </form>
+                            <?php else: ?>
+                                <?php if ($general->showPrices()): ?>
+                                    <div class="product__details__price">$<?php echo number_format($product->PreVtaFinal1(), 2,',','.'); ?></div>
+                                <?php endif; ?>
                             <?php endif; ?>
 
                             <div class="js-login-message"></div>
@@ -105,7 +109,12 @@
                                     <!-- <li><b>Grupo</b> <span><?php //echo ucfirst(strtolower($product->grupo)); ?></span></li> -->
                                 <?php //endif; ?>
 
-                                <li><b>Disponibilidad</b> <span>Hay Stock</span></li>
+                                <li><b>Disponibilidad</b>
+                                <?php if ($product->getStock() == 0) : ?> 
+                                    <span class="text-danger">Sin Stock</span></li> 
+                                <?php else: ?>
+                                    <span>Hay Stock</span></li>
+                                <?php endif; ?>
 
                                 <?php if ($product->observaciones) : ?>
                                     <li><b>Observaciones</b> <span><?php echo ucfirst(strtolower($product->observaciones)); ?></span></li>

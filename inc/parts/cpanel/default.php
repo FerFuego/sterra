@@ -130,7 +130,7 @@
             <div class="d-flex">
                 <div class="form-group w-100 pl-2">
                     <br>
-                    <label for="aumento_1">Mínimo de Compra</label> 
+                    <label for="aumento_1">Mínimo de compra</label> 
                 </div>
                 <div class="form-group w-100 pl-2">
                     <label for="aumento_1">Pesos ($)</label> <br>
@@ -139,21 +139,25 @@
             </div>
             <div class="d-flex">
                 <div class="form-group w-100 pl-2">
-                    <br>
-                    <label for="aumento_1">Mostrar Precios en la tienda implica que los usuarios puedan realizar pedidos sin iniciar sesión.</label> 
+                    <label for="show_prices">Mostrar Precios en la tienda</label> 
                 </div>
                 <div class="form-group w-100 pl-2">
-                    <label for="aumento_1">Marcada = Mostrar / Desmarcada = Ocultar</label> <br>
                     <input type="checkbox" name="show_prices" id="show_prices" value="1" <?php echo $general->show_prices ? 'checked' : ''; ?>>
                 </div>
             </div>
             <div class="d-flex">
                 <div class="form-group w-100 pl-2">
-                    <br>
-                    <label for="show_instagram">Mostrar Instagram en la tienda implica mostrar una sección en la home con la sección de Instagram <span class="text-danger">(necesita tener una cuenta y estar seteada en el campo instagram).</span></label> 
+                    <label for="active_register">Activar el regitros de usuarios</label> 
                 </div>
                 <div class="form-group w-100 pl-2">
-                    <label for="show_instagram">Marcada = Mostrar / Desmarcada = Ocultar</label> <br>
+                    <input type="checkbox" name="active_register" id="active_register" value="1" <?php echo $general->active_register ? 'checked' : ''; ?>>
+                </div>
+            </div>
+            <div class="d-flex">
+                <div class="form-group w-100 pl-2">
+                    <label for="show_instagram">Mostrar Instagram en la tienda implica mostrar una seccion en la home con la sección de Instagram <span class="text-danger">(necesita tener una cuenta y estar seteada en el campo instagram).</span></label> 
+                </div>
+                <div class="form-group w-100 pl-2">
                     <input type="checkbox" name="show_instagram" id="show_instagram" value="1" <?php echo $general->show_instagram ? 'checked' : ''; ?>>
                 </div>
             </div>
