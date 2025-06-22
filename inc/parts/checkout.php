@@ -58,9 +58,11 @@
                                 </tr>
                             <?php } ?>
                         </table>
-                        <div class="alert alert-danger mb-0" role="alert">
-                            <i class="fa fa-exclamation-circle"></i> Si ya sos cliente, ingresa con tu usuario y accede a nuestros descuentos por compra mayorista.
-                        </div>
+                        <?php if (!isset($_SESSION['user'])): ?>
+                            <div class="alert alert-danger mb-0" role="alert">
+                                <i class="fa fa-exclamation-circle"></i> Si ya sos cliente, ingresa con tu usuario y accede a nuestros descuentos por compra mayorista.
+                            </div>
+                        <?php endif; ?>
                     </div>
                 <?php endif; ?>
             </div>
@@ -100,15 +102,19 @@
                 <input type="hidden" name="total" value="<?php echo $pedido->getTotalFinal() - $descuento; ?>">
                  
                 <!-- Danger Bootstrap -->
-                 <?php if ($pedido->getTotalFinal() < $general->getMinimo() && !isset($_SESSION['user'])) : ?>
+                 <?php if ($pedido->getTotalFinal() < $general->getMinimo()) : ?>
                     <div class="alert alert-danger" role="alert">
                         <i class="fa fa-exclamation-circle"></i> El minimo de compra para cerrar el pedido es de <strong>$<?php echo number_format($general->getMinimo(), 0,'','.'); ?></strong>
                     </div>
                 <?php endif; ?>
                 
                 <!-- Final Order -->
-                <?php if ((!$result['cpanel'] && $pedido->getTotalFinal() >= $general->getMinimo()) || isset($_SESSION['user'])) : ?>
+                <?php if (($pedido->getTotalFinal() >= $general->getMinimo()) && isset($_SESSION['user'])) : ?>
                     <a href="#" id="js-finally-order" data-id="<?php echo $result['Id_Pedido']; ?>" class="primary-btn">Finalizar Pedido</a>
+                <?php elseif (!isset($_SESSION['user'])) : ?>
+                    <div class="alert alert-danger mb-0" role="alert">
+                        <i class="fa fa-exclamation-circle"></i> Ingresa con tu usuario o registrate para poder realizar pedidos.
+                    </div>
                 <?php endif; ?>
             </div>
         </div>

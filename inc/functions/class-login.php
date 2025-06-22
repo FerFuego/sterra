@@ -17,7 +17,8 @@ class Login{
 	public function loginProcess() {
 
 		$obj = new sQuery();
-		$result = $obj->executeQuery("SELECT * FROM clientes WHERE Usuario = '$this->user' AND Password = md5('$this->pass') LIMIT 1");
+		//$result = $obj->executeQuery("SELECT * FROM clientes WHERE Usuario = '$this->user' AND Password = md5('$this->pass') LIMIT 1");
+		$result = $obj->executeQuery("SELECT * FROM clientes WHERE Usuario = '$this->user' AND Password = '$this->pass' LIMIT 1");
 
 		return $result;
 	}

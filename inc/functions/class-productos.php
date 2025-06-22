@@ -26,6 +26,7 @@ class Productos {
     public $novedad;
     public $oferta;
     public $observaciones;
+    public $StockActual;
     protected $obj;
 
     public function __construct($id=0) {
@@ -58,7 +59,7 @@ class Productos {
             $this->novedad = $row['Novedad'];
             $this->oferta = $row['Oferta'];
             $this->observaciones = $row['Observaciones'];
-
+            $this->StockActual = $row['StockActual'];
         }
     }
 

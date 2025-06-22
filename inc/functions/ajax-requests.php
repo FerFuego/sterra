@@ -816,11 +816,12 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'registerUs
 
     // Insert User
     $user = new Usuarios();
-    $user->Id_Cliente = date('YmdHis');
+    $user->Id_Cliente = time();
     $user->Nombre = $name;
     $user->Mail = $email;
     $user->Usuario = $username;
-    $user->Password = md5($password);
+    //$user->Password = md5($password);
+    $user->Password = $password;
     $user->Localidad = $locality;
     $user->ListaPrecioDef = 1;
     $user->tipo = 0;
