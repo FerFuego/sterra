@@ -816,7 +816,7 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'registerUs
 
     // Insert User
     $user = new Usuarios();
-    $user->Id_Cliente = time();
+    $user->Id_Cliente = date('YmdHis');
     $user->Nombre = $name;
     $user->Mail = $email;
     $user->Usuario = $username;
