@@ -16,6 +16,7 @@
                 <th class="text-left">Grupo</th>
                 <th class="text-left">Novedad</th>
                 <th class="text-left">Oferta</th>
+                <th class="text-left">Stock</th>
                 <th class="text-left">Observaciones</th>
                 <th class="text-left">Editar</th>
                 <th class="text-left">Eliminar</th>
