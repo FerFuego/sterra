@@ -95,6 +95,13 @@ class Detalles {
         $this->obj->executeQuery("DELETE FROM pedidos_deta WHERE Auto = '$this->Auto'");
     }
 
+    public function updateStock($pedido) {
+        while ( $producto = $pedido->fetch_object() ) :
+            $this->obj = new sQuery();
+            $this->obj->executeQuery("UPDATE productos SET StockActual = (StockActual - " . $producto->Cantidad . ") WHERE CodProducto = '" . $producto->CodProducto . "'");
+        endwhile;
+    }
+
     public function closeConnection(){
         @$this->obj->Clean();
 		$this->obj->Close();

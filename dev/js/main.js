@@ -219,8 +219,10 @@
     proQty.find('input').on('input', function () {
         var $input = $(this);
         var maxValue = $input.attr('max');
-        var value = $input.val();
-        if (value > maxValue) {
+        var value = parseFloat($input.val());
+        if (isNaN(value)) {
+            $input.val(0);
+        } else if (value > maxValue) {
             $input.val(maxValue);
         } else if (value < 0) {
             $input.val(0);
