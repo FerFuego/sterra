@@ -27,6 +27,9 @@
         <?php echo $product->Oferta; ?>
     </td>
     <td class="text-left">
+        <?php echo $product->StockActual; ?>
+    </td>
+    <td class="text-left">
         <?php echo $product->Observaciones; ?>
     </td>
     <td class="shoping__cart__item__update text-center">
