@@ -36,18 +36,18 @@
                     <input type="hidden" name="name_product" value="<?php echo $product->Nombre; ?>">
                     <input type="hidden" name="price_product" value="<?php echo number_format(Productos::PreVtaFinal($product->PreVtaFinal1), 2,',','.'); ?>">
                     <div class="d-flex">
-                        <textarea type="text" name="nota" class="product__details__note" placeholder="Agregar Nota"></textarea>
+                        <textarea type="text" name="nota" class="product__details__note" placeholder="Agregar Nota"><?php echo ($prod->getStock() > 0) ? '' : 'Sin Stock'; ?></textarea>
                     </div>
 
                     <div class="product__details__quantity mb-2">
                         <div class="quantity">
                             <div class="pro-qty">
-                                <input type="number" name="cant" min="1" max="<?php echo $prod->getStock(); ?>" value="1"> 
+                                <input type="number" name="cant" min="1" max="<?php echo $prod->getStock(); ?>" value="<?php echo ($prod->getStock() > 0) ? 1 : 0; ?>"> 
                             </div>
                         </div>
                     </div>
 
-                    <input type="submit" class="primary-btn mb-2 add-to-cart" value="+ CARRITO">
+                    <input type="submit" class="primary-btn mb-2 add-to-cart" value="+ CARRITO"  <?php echo ($prod->getStock() > 0) ? '' : 'disabled'; ?>>
                 </form>
             <?php endif; ?>
         </div>
