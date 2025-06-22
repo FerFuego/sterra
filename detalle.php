@@ -61,7 +61,7 @@
 
                             <h4>Cód.: <?php echo $product->getCode(); ?></h4>
 
-                            <?php if ($general->showPrices()): ?>
+                            <?php if ($general->showLoginPrices()): ?>
                                 <form class="js-form-cart">
                                     <div class="product__details__price">$<?php echo number_format($product->PreVtaFinal1(), 2,',','.'); ?></div>
                                     <input type="hidden" name="id_product" value="<?php echo $product->getID(); ?>">
@@ -84,6 +84,10 @@
                                     <input type="submit" class="primary-btn" value="AGREGAR AL CARRITO">
                                     <!-- <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a> -->
                                 </form>
+                            <?php else: ?>
+                                <?php if ($general->showPrices()): ?>
+                                    <div class="product__details__price">$<?php echo number_format($product->PreVtaFinal1(), 2,',','.'); ?></div>
+                                <?php endif; ?>
                             <?php endif; ?>
 
                             <div class="js-login-message"></div>

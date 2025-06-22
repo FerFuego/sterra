@@ -71,6 +71,11 @@ class Configuracion {
         return $this->show_prices;
     }
 
+    public function showLoginPrices(){
+        if ( isset($_SESSION['user']) ) return true;
+        return  false;
+    }
+
     public function getAumento(){
         return $this->aumento_1;
     }
