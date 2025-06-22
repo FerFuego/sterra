@@ -69,6 +69,7 @@ class Productos {
     public function getSubRubroID(){ return $this->id_subrubro; }
     public function getGrupoID(){ return $this->id_grupo; }
     public function getNombre(){ return $this->nombre; }
+    public function getStock(){ return $this->StockActual; }
     
     public static function PreVtaFinal($precio){ 
         $config  = new Configuracion();

@@ -1,9 +1,11 @@
+<?php $prod = new Productos($product->CodProducto); ?>
+
 <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6">
     <div class="product__item">
         <div class="product__item__pic set-bg" data-setbg="<?php echo Productos::getImage( $product->CodProducto ); ?>">
             <!-- <div class="product__discount__percent">-20%</div> -->
             <div class="product__code"><h5><?php echo 'COD: ' . $product->CodProducto; ?></h5></div>
-            <?php if ($general->showLoginPrices()): ?>
+            <?php if ($general->showLoginPrices() && $prod->getStock() > 0 ): ?>
                 <form class="js-form-cart">
                     <input type="hidden" name="id_product" value="<?php echo $product->Id_Producto; ?>">
                     <input type="hidden" name="cod_product" value="<?php echo $product->CodProducto; ?>">
@@ -40,7 +42,7 @@
                     <div class="product__details__quantity mb-2">
                         <div class="quantity">
                             <div class="pro-qty">
-                                <input type="number" name="cant" min="1" max="99999" value="1"> 
+                                <input type="number" name="cant" min="1" max="<?php echo $prod->getStock(); ?>" value="1"> 
                             </div>
                         </div>
                     </div>

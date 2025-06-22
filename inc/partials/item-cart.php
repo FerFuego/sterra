@@ -17,7 +17,8 @@
         <td class="shoping__cart__quantity">
             <div class="quantity">
                 <div class="pro-qty">
-                    <input type="text" name="cant" id="cant_<?php echo $product->Auto; ?>" value="<?php echo $product->Cantidad; ?>">
+                    <?php $prod = new Productos($product->CodProducto); ?>
+                    <input type="number" name="cant" max="<?php echo $prod->getStock(); ?>" id="cant_<?php echo $product->Auto; ?>" value="<?php echo $product->Cantidad; ?>">
                 </div>
             </div>
         </td>

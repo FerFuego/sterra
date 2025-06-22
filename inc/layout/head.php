@@ -1,5 +1,5 @@
 <?php session_start(); ?>
-<!-- php Functions -->
+
 <?php require('inc/functions/class-store.php'); ?>
 
 <?php

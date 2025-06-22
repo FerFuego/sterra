@@ -193,23 +193,40 @@
 		Quantity change
 	--------------------- */
     var proQty = $('.pro-qty');
-    proQty.prepend('<span class="dec qtybtn">-</span>');
-    proQty.append('<span class="inc qtybtn">+</span>');
-    proQty.on('click', '.qtybtn', function () {
-        var $button = $(this);
-        var oldValue = $button.parent().find('input').val();
-        if ($button.hasClass('inc')) {
-            var newVal = parseFloat(oldValue) + 1;
-        } else {
-            // Don't allow decrementing below zero
-            if (oldValue > 0) {
-                var newVal = parseFloat(oldValue) - 1;
+        proQty.prepend('<span class="dec qtybtn">-</span>');
+        proQty.append('<span class="inc qtybtn">+</span>');
+        proQty.on('click', '.qtybtn', function () {
+            var $button = $(this);
+            var oldValue = $button.parent().find('input').val();
+            var maxVal = $button.parent().find('input').attr('max');
+            if ($button.hasClass('inc')) {
+                var newVal = parseFloat(oldValue) + 1;
+                if (newVal > maxVal) {
+                    newVal = maxVal;
+                }
             } else {
-                newVal = 0;
+                // Don't allow decrementing below zero
+                if (oldValue > 0) {
+                    var newVal = parseFloat(oldValue) - 1;
+                } else {
+                    newVal = 0;
+                }
             }
+            $button.parent().find('input').val(newVal);
+        });
+        
+    // Agregar listener para validar ingreso por teclado
+    proQty.find('input').on('input', function () {
+        var $input = $(this);
+        var maxValue = $input.attr('max');
+        var value = $input.val();
+        if (value > maxValue) {
+            $input.val(maxValue);
+        } else if (value < 0) {
+            $input.val(0);
         }
-        $button.parent().find('input').val(newVal);
     });
+
 
 })(jQuery);
 
