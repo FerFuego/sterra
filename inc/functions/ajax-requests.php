@@ -249,6 +249,11 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'finallyOrd
     $order->Cerrado = 1;
     $order->finalizarPedido();
 
+    // Update stock
+    $detail = new Detalles();
+    $pedido = $detail->getDetallesPedido($id_pedido);
+    $detail->updateStock($pedido);
+
     // Send mail to client
     $datos = new Store();
     $body = $datos->getBodyEmail($id_pedido);
