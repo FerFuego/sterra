@@ -224,16 +224,16 @@ Class Store {
         if (isset($_SESSION["user"])) {
             // usuario recurrente
             $user = new Usuarios($_SESSION["Id_Cliente"]);
-            if ($user->getTipo() == 1) {
+            // if ($user->getTipo() == 1) {
                 return number_format($product->PreVtaFinal1(), 2,',','.');
-            }
+            // }
         }
         
         // Usuario no logueado o tipo 2
-        //if (isset($aumento) && !empty($aumento) && is_numeric($aumento) && $aumento > 0) {
+        if (isset($aumento) && !empty($aumento) && is_numeric($aumento) && $aumento > 0) {
             // aumento %
-            //$precio = $product->PreVtaFinal1() + ($product->PreVtaFinal1() * ($aumento / 100));
-        //}
+            $precio = $product->PreVtaFinal1() + ($product->PreVtaFinal1() * ($aumento / 100));
+        }
 
         return number_format($precio, 2,',','.');
     }
