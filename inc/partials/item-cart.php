@@ -14,7 +14,7 @@
             <textarea type="text" name="nota" id="nota_<?php echo $item->Auto; ?>"><?php echo $item->Notas; ?></textarea>
         </td>
         <td class="shoping__cart__price">
-            $<?php echo number_format($prod->precio_venta_final_1, 2,',','.'); ?>
+            $<?php echo number_format($item->PreVtaFinal1, 2,',','.'); ?>
         </td>
         <td class="shoping__cart__quantity">
             <div class="quantity">
