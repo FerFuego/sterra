@@ -1,5 +1,4 @@
 <?php $prod = new Productos($item->CodProducto); ?>
-<?php print_r($item); ?>
 <tr>
     <td class="shoping__cart__item">
         <div class="d-flex">
