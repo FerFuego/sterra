@@ -84,10 +84,10 @@ class Productos {
         } 
         
         // Usuario no logueado o tipo 2
-        if (isset($aumento) && !empty($aumento) && is_numeric($aumento) && $aumento > 0) {
+        //if (isset($aumento) && !empty($aumento) && is_numeric($aumento) && $aumento > 0) {
             // aumento %
-            return $precio + ($precio * ($aumento / 100));
-        }
+            //return $precio + ($precio * ($aumento / 100));
+        //}
 
         return $precio; 
     }
@@ -104,10 +104,10 @@ class Productos {
         } 
         
         // Usuario no logueado o tipo 2
-        if (isset($aumento) && !empty($aumento) && is_numeric($aumento) && $aumento > 0) {
+        //if (isset($aumento) && !empty($aumento) && is_numeric($aumento) && $aumento > 0) {
             // aumento %
-            return $this->precio_venta_final_1 + ($this->precio_venta_final_1 * ($aumento / 100));
-        }
+            //return $this->precio_venta_final_1 + ($this->precio_venta_final_1 * ($aumento / 100));
+        //}
 
         return $precio; 
     }
