@@ -1,3 +1,5 @@
+<?php $prod = new Productos($product->CodProducto); ?>
+
 <tr>
     <td class="shoping__cart__item">
         <div class="d-flex">
@@ -12,13 +14,12 @@
             <textarea type="text" name="nota" id="nota_<?php echo $product->Auto; ?>"><?php echo $product->Notas; ?></textarea>
         </td>
         <td class="shoping__cart__price">
-            $<?php echo number_format($product->PreVtaFinal1, 2,',','.'); ?>
+            $<?php echo number_format($prod->precio_venta_final_1, 2,',','.'); ?>
         </td>
         <td class="shoping__cart__quantity">
             <div class="quantity">
                 <div class="pro-qty">
-                    <?php //$prod = new Productos($product->CodProducto); ?>
-                    <input type="number" name="cant" max="1000<?php //echo $prod->getStock(); ?>" id="cant_<?php echo $product->Auto; ?>" value="<?php echo $product->Cantidad; ?>">
+                    <input type="number" name="cant" max="1000<?php echo $prod->getStock(); ?>" id="cant_<?php echo $product->Auto; ?>" value="<?php echo $product->Cantidad; ?>">
                 </div>
             </div>
         </td>
