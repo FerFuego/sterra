@@ -18,7 +18,7 @@
             <div class="quantity">
                 <div class="pro-qty">
                     <?php //$prod = new Productos($product->CodProducto); ?>
-                    <input type="number" name="cant" max="<?php //echo $prod->getStock(); ?>" id="cant_<?php echo $product->Auto; ?>" value="<?php echo $product->Cantidad; ?>">
+                    <input type="number" name="cant" max="1000<?php //echo $prod->getStock(); ?>" id="cant_<?php echo $product->Auto; ?>" value="<?php echo $product->Cantidad; ?>">
                 </div>
             </div>
         </td>
