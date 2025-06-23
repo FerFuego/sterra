@@ -20,8 +20,8 @@
                             $results = $detalle->getDetallesPedido($result['Id_Pedido']);
 
                             if ( $results->num_rows > 0 ) :
-                                while ( $product = $results->fetch_object() ) :
-                                    $pedido->sumTotalCart($product->ImpTotal);
+                                while ( $item = $results->fetch_object() ) :
+                                    $pedido->sumTotalCart($item->ImpTotal);
                                     require 'inc/partials/item-cart.php';
                                 endwhile;
                             else : ?>
