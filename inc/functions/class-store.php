@@ -230,7 +230,7 @@ Class Store {
         }
         
         // Usuario no logueado o tipo 2
-        if ($aumento) {
+        if ($aumento > 0) {
             // aumento %
             $precio = $product->PreVtaFinal1() + ($product->PreVtaFinal1() * ($aumento / 100));
         }
