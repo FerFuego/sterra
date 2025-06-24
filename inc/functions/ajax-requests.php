@@ -327,7 +327,7 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'dataClient
 if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'operationClient') {
 
     $id   = (isset($_POST['id']) ? filter_var($_POST['id'], FILTER_VALIDATE_INT) : null);
-    $type = (isset($_POST['type']) ? filter_var($_POST['type'], FILTER_UNSAFE_RAW) : null);
+    $ListaPrecioDef = (isset($_POST['price']) ? filter_var($_POST['price'], FILTER_UNSAFE_RAW) : null);
     $type_cli = (isset($_POST['type_cli']) ? filter_var($_POST['type_cli'], FILTER_UNSAFE_RAW) : null);
     $name = (isset($_POST['name']) ? filter_var($_POST['name'], FILTER_UNSAFE_RAW) : null);
     $mail = (isset($_POST['mail']) ? filter_var($_POST['mail'], FILTER_UNSAFE_RAW) : null);
@@ -342,9 +342,9 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'operationC
         $user->Localidad = $locality;
         $user->Mail = $mail;
         $user->Usuario = $username;
-        $user->Password = md5($password);
-        $user->ListaPrecioDef = 1;
-        $user->tipo = $type;
+        $user->Password = $password;
+        $user->ListaPrecioDef = $ListaPrecioDef;
+        $user->tipo = 1;
         $user->is_Admin = 0;
         $user->insert();
         die('true');
@@ -358,10 +358,10 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'operationC
         $user->Mail = $mail;
         $user->Usuario = $username;
         if ($password) {
-            $user->Password = md5($password);
+            $user->Password = $password;
         }
-        $user->ListaPrecioDef = 1;
-        $user->tipo = $type;
+        $user->ListaPrecioDef = $ListaPrecioDef;
+        $user->tipo = 1;
         $user->is_Admin = 0;
         $user->update();
         die('true');

@@ -766,8 +766,9 @@ $(document).ready( function () {
         
             var formData = new FormData();
                 formData.append('action', 'operationClient');
-                formData.append('type_cli', values.type_cli);
-                formData.append('type', values.type);
+                formData.append('id', values.id);
+                formData.append('type_cli', values.type);
+                formData.append('price', values.price);
                 formData.append('name', values.name);
                 formData.append('locality', values.locality);
                 formData.append('mail', values.mail);
@@ -1265,6 +1266,7 @@ function getClientdata(obj) {
                 $('#mail').val(data.Mail);
                 $('#username').val(data.Usuario);
                 $('#pass_cli').val(data.Password);
+                $('#price').val(data.ListaPrecioDef);
                 $('#type').val(data.tipo).change();
             }
         }
