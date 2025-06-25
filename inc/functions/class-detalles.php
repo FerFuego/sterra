@@ -41,7 +41,7 @@ class Detalles {
     public function getId_Producto(){ return $this->Id_Producto; }
     public function getCodProducto(){ return $this->CodProducto; }
     public function getNombre(){ return $this->Nombre; }
-    public function getPreVtaFinal1(){ return $this->PreVtaFinal1; }
+    public function getPreVtaFinal(){ return $this->PreVtaFinal1; }
     public function getCantidad(){ return $this->Cantidad; }
     public function getImpTotal(){ return $this->ImpTotal; }
     public function getTotalFinal(){ return $this->totalFinal; }
@@ -75,9 +75,9 @@ class Detalles {
         return $result;
     }
 
-    public function ActualizarPrecio($Id_Pedido, $CodProducto, $PreVtaFinal1) {
+    public function ActualizarPrecio($Id_Pedido, $CodProducto, $PreVtaFinal) {
         $this->obj = new sQuery();
-        $this->obj->executeQuery("UPDATE pedidos_deta SET PreVtaFinal1 = $PreVtaFinal1, ImpTotal = (Cantidad * $PreVtaFinal1)  WHERE (Id_Pedido='$Id_Pedido') AND (CodProducto='$CodProducto')");
+        $this->obj->executeQuery("UPDATE pedidos_deta SET PreVtaFinal1 = '$PreVtaFinal', ImpTotal = (Cantidad * '$PreVtaFinal')  WHERE (Id_Pedido='$Id_Pedido') AND (CodProducto='$CodProducto')");
     }
 
     public function insertDetalle() {

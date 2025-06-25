@@ -10,7 +10,7 @@
                     <input type="hidden" name="id_product" value="<?php echo $product->Id_Producto; ?>">
                     <input type="hidden" name="cod_product" value="<?php echo $product->CodProducto; ?>">
                     <input type="hidden" name="name_product" value="<?php echo $product->Nombre; ?>">
-                    <input type="hidden" name="price_product" value="<?php echo number_format(Productos::PreVtaFinal($product->PreVtaFinal1), 2,',','.'); ?>">
+                    <input type="hidden" name="price_product" value="<?php echo Store::checkUserCapabilities( $prod ); ?>">
                     <input type="hidden" name="nota" value="">
                     <input type="hidden" name="cant" value="1"> 
                     <ul class="product__item__pic__hover">
@@ -26,7 +26,7 @@
             <h6><a href="detalle.php?id=<?php echo $product->CodProducto; ?>"><?php echo $product->Nombre; ?></a></h6>
             
             <?php if ($general->showPrices()): ?>
-                <p class="text-danger"><?php echo 'Precio Lista: <strong>$ '. number_format(Productos::PreVtaFinal($product->PreVtaFinal1), 2,',','.') . '</strong>'; ?></p>
+                <p class="text-danger"><?php echo 'Precio Lista: <strong>$ '. Store::checkUserCapabilities( $prod ) . '</strong>'; ?></p>
             <?php endif; ?>
             
             <?php if ($general->showLoginPrices()): ?>
@@ -34,7 +34,7 @@
                     <input type="hidden" name="id_product" value="<?php echo $product->Id_Producto; ?>">
                     <input type="hidden" name="cod_product" value="<?php echo $product->CodProducto; ?>">
                     <input type="hidden" name="name_product" value="<?php echo $product->Nombre; ?>">
-                    <input type="hidden" name="price_product" value="<?php echo number_format(Productos::PreVtaFinal($product->PreVtaFinal1), 2,',','.'); ?>">
+                    <input type="hidden" name="price_product" value="<?php echo Store::checkUserCapabilities( $prod ); ?>">
                     <div class="d-flex">
                         <textarea type="text" name="nota" class="product__details__note" placeholder="Agregar Nota"><?php echo ($prod->getStock() > 0) ? '' : 'Sin Stock'; ?></textarea>
                     </div>

@@ -37,7 +37,12 @@
             </div>
             <div class="form-group">
                 <label for="price">Lista Precios</label>
-                <input type="text" name="price" id="price">
+                <select class="form-control" name="price" id="price">
+                    <option value="">Seleccione</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
             </div>
         </form>
       </div>

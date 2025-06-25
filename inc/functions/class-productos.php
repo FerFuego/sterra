@@ -75,16 +75,6 @@ class Productos {
         $config  = new Configuracion();
         $aumento = $config->getAumento();
         
-        
-        // Usuario logueado
-        if (isset($_SESSION["user"])) {
-            // user recurrente
-            $user = new Usuarios($_SESSION["Id_Cliente"]);
-            // if ($user->getTipo() == 1) 
-            return $precio;
-        } 
-        
-        // Usuario no logueado o tipo 2
         if (isset($aumento) && !empty($aumento) && is_numeric($aumento) && $aumento > 0) {
             // aumento %
             return $precio + ($precio * ($aumento / 100));
@@ -92,26 +82,36 @@ class Productos {
 
         return $precio; 
     }
-    public function PreVtaFinal1(){ 
-        $precio  = 0;
+    
+    public function PreVta(){ 
         $config  = new Configuracion();
         $aumento = $config->getAumento();
         
         // Usuario logueado
         if (isset($_SESSION["user"])) {
-            // user recurrente
+
             $user = new Usuarios($_SESSION["Id_Cliente"]);
-            //if ($user->getTipo() == 1) 
-            return $this->precio_venta_final_1;
-        } 
+
+            if ($user->getListaPrecioDef() == 1) {
+                $precio = $this->precio_venta_final_1;
+            } elseif ($user->getListaPrecioDef() == 2) {
+                $precio = $this->precio_venta_final_2;
+            } elseif ($user->getListaPrecioDef() == 3) {
+                $precio = $this->precio_venta_final_3;
+            } else {
+                $precio = $this->precio_venta_final_1;
+            }
+            
+        } else {
+            $precio = $this->precio_venta_final_1;
+        }
         
-        // Usuario no logueado o tipo 2
+        // aumento %
         if (isset($aumento) && !empty($aumento) && is_numeric($aumento) && $aumento > 0) {
-            // aumento %
-            return $this->precio_venta_final_1 + ($this->precio_venta_final_1 * ($aumento / 100));
+            $precio = $precio + ($precio * ($aumento / 100));
         }
 
-        return $precio; 
+        return $precio;
     }
 
     public function getProducts($opcion, $id_rubro, $id_subrubro, $id_grupo, $minamount, $maxamount, $order){

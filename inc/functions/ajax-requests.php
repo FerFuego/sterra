@@ -168,9 +168,9 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'insertProd
     $detail->Id_Producto = $prod->getID();
     $detail->CodProducto = $cod_product;
     $detail->Nombre = $prod->getNombre();
-    $detail->PreVtaFinal1 = $prod->PreVtaFinal1();
+    $detail->PreVtaFinal1 = $prod->PreVta();
     $detail->Cantidad = $cant;
-    $detail->ImpTotal = $prod->PreVtaFinal1() * $cant;
+    $detail->ImpTotal = $prod->PreVta() * $cant;
     $detail->Notas = $note;
     $detail->insertDetalle();
 
@@ -195,7 +195,7 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'updateProd
     $item->Auto = $id_productItem;
     $item->Cantidad = $cant;
     $item->Notas = $note;
-    $item->ImpTotal = $prod->PreVtaFinal1() * $cant;
+    $item->ImpTotal = $prod->PreVta() * $cant;
     $item->updateDetalle();
 
     die('true');
@@ -344,7 +344,7 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'operationC
         $user->Usuario = $username;
         $user->Password = $password;
         $user->ListaPrecioDef = $ListaPrecioDef;
-        $user->tipo = 1;
+        $user->tipo = $ListaPrecioDef;
         $user->is_Admin = 0;
         $user->insert();
         die('true');
@@ -361,8 +361,7 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'operationC
             $user->Password = $password;
         }
         $user->ListaPrecioDef = $ListaPrecioDef;
-        $user->tipo = 1;
-        $user->is_Admin = 0;
+        $user->tipo = $ListaPrecioDef;
         $user->update();
         die('true');
     }

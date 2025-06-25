@@ -1266,7 +1266,7 @@ function getClientdata(obj) {
                 $('#mail').val(data.Mail);
                 $('#username').val(data.Usuario);
                 $('#pass_cli').val(data.Password);
-                $('#price').val(data.ListaPrecioDef);
+                $('#price').val(data.ListaPrecioDef).niceSelect('update');
                 $('#type').val(data.tipo).change();
             }
         }

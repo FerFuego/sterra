@@ -158,8 +158,8 @@ class Pedidos {
             while ( $detalle = $results->fetch_object() ) :
                 $producto = new Productos($detalle->CodProducto);
                 if ( null !== $producto->cod_producto ) {
-                    if ( Productos::PreVtaFinal($producto->precio_venta_final_1) !== $detalle->PreVtaFinal1 ) :
-                        $items->ActualizarPrecio($Id_Pedido, $detalle->CodProducto, Productos::PreVtaFinal($producto->precio_venta_final_1));
+                    if ( Store::checkUserCapabilities($producto, false) !== $detalle->PreVtaFinal1 ) :
+                        $items->ActualizarPrecio($Id_Pedido, $detalle->CodProducto, Store::checkUserCapabilities($producto, false));
                         $updated++;
                     endif;
                 } else {
