@@ -9,7 +9,7 @@
         <?php echo $user->Usuario; ?>
     </td>
     <td class="text-left">
-        <?php echo $user->tipo; ?>
+        <?php echo $user->ListaPrecioDef; ?>
     </td>
     <td class="shoping__cart__item__update text-center">
         <span onclick="getClientdata(this);" data-cli="<?php echo $user->Id_Cliente; ?>" data-toggle="modal" data-target="#clientModal" class="icon_pencil-edit" title="Editar"></span>
