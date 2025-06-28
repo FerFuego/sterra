@@ -337,7 +337,7 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'operationC
 
     if ( $type_cli == 'new') {
         $user = new Usuarios();
-        $user->Id_Cliente = date('YmdHis');
+        $user->Id_Cliente = ($id) ? $id : date('YmdHis');
         $user->Nombre = $name;
         $user->Localidad = $locality;
         $user->Mail = $mail;
