@@ -195,10 +195,10 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'updateProd
     $detail->Auto = $id_productItem;
     $detail->Cantidad = $cant;
     $detail->Notas = $note;
-    $detail->ImpTotal = $prod->PreVta() * 10;
+    $detail->ImpTotal = $prod->PreVta() * $cant;
     $detail->updateDetalle();
 
-    die('true');
+    die( $prod->PreVta() );
 }
 
 /**
