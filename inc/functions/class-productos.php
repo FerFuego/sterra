@@ -89,12 +89,14 @@ class Productos {
         // Usuario logueado
         if (isset($_SESSION["user"])) {
             $user = new Usuarios($_SESSION["Id_Cliente"]);
+            $listaPrecioDef = $user->getListaPrecioDef();
+             var_dump($listaPrecioDef); // Verificar el valor de $listaPrecioDef
             $precios = [
                 1 => $this->precio_venta_final_1,
                 2 => $this->precio_venta_final_2,
                 3 => $this->precio_venta_final_3,
             ];
-            $precio = $precios[$user->getListaPrecioDef()] ?? $this->precio_venta_final_1;
+            $precio = $precios[$listaPrecioDef] ?? $this->precio_venta_final_1;
         } else {
             $precio = $this->precio_venta_final_1;
         }
@@ -103,9 +105,6 @@ class Productos {
         if (filter_var($aumento, FILTER_VALIDATE_FLOAT) && $aumento > 0) {
             $precio = $precio + ($precio * ($aumento / 100));
         }
-
-        var_dump($precio); // Verificar el valor de $precio
-        var_dump($aumento); // Verificar el valor de $aumento
 
         return $precio;
     }
