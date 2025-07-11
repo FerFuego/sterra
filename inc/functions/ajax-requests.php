@@ -191,12 +191,12 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'updateProd
 
     if ( !$prod ) die('false');
 
-    $item = new Detalles();
-    $item->Auto = $id_productItem;
-    $item->Cantidad = $cant;
-    $item->Notas = $note;
-    $item->ImpTotal = $prod->PreVta() * $cant;
-    $item->updateDetalle();
+    $detail = new Detalles();
+    $detail->Auto = $id_productItem;
+    $detail->Cantidad = $cant;
+    $detail->Notas = $note;
+    $detail->ImpTotal = $prod->PreVta() * 10;
+    $detail->updateDetalle();
 
     die('true');
 }
