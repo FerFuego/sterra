@@ -34,7 +34,7 @@ class Productos {
         if ($id != 0) {
             
             $this->obj = new sQuery();
-            $result = $this->obj->executeQuery("SELECT * FROM productos WHERE CodProducto='$id'");
+            $result = $this->obj->executeQuery("SELECT * FROM productos WHERE CodProducto='".$id."'");
             $row = mysqli_fetch_assoc($result);
 
             $this->id_producto = $row['Id_Producto'];
