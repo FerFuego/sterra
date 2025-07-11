@@ -184,12 +184,12 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'updateProd
 
     $note    = (isset($_POST['nota']) ? filter_var($_POST['nota'], FILTER_UNSAFE_RAW) : null);
     $cant    = (isset($_POST['cant']) ? filter_var($_POST['cant'], FILTER_VALIDATE_INT) : null);
-    $CodProducto = (isset($_POST['codprod']) ? filter_var($_POST['codprod'], FILTER_VALIDATE_INT) : null);
+    $CodProducto = (isset($_POST['codprod']) ? filter_var($_POST['codprod'], FILTER_SANITIZE_STRING) : null);
     $id_productItem = (isset($_POST['id_item']) ? filter_var($_POST['id_item'], FILTER_VALIDATE_INT) : null);
 
     $prod = new Productos($CodProducto);
 
-    var_dump($CodProducto);
+    var_dump($prod);
 
     if ( !$prod ) die('false');
 
