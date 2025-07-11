@@ -527,7 +527,7 @@ $(document).ready( function () {
             success: function (response) {
                 console.log(response)
                 if (response == 'true') {
-                    location.reload();
+                    //location.reload();
                 } else {
                     $('.js-cart-message').html('<small class="text-danger">Ocurrio un error, por favor recarge la pagina e intente nuevamente.</small>');
                     toastr.success('Ocurrio un error, por favor recarge la pagina e intente nuevamente.');
