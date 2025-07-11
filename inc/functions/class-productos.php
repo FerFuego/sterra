@@ -104,6 +104,9 @@ class Productos {
             $precio = $precio + ($precio * ($aumento / 100));
         }
 
+        var_dump($precio); // Verificar el valor de $precio
+        var_dump($aumento); // Verificar el valor de $aumento
+
         return $precio;
     }
 
