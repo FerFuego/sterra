@@ -189,8 +189,6 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'updateProd
 
     $prod = new Productos($CodProducto);
 
-    var_dump($prod);
-
     if ( !$prod ) die('false');
 
     $detail = new Detalles();
@@ -200,7 +198,7 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'updateProd
     $detail->ImpTotal = $prod->PreVta() * $cant;
     $detail->updateDetalle();
 
-    die( $prod->PreVta() );
+    die( 'true' );
 }
 
 /**

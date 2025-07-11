@@ -96,7 +96,6 @@ class Productos {
                 3 => $this->precio_venta_final_3,
             ];
             $precio = $precios[$listaPrecioDef] ?? $this->precio_venta_final_1;
-            var_dump($precio);
         } else {
             $precio = $this->precio_venta_final_1;
         }
