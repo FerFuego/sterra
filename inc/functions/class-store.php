@@ -221,33 +221,27 @@ Class Store {
         
         // Usuario logueado
         if (isset($_SESSION["user"])) {
-
             $user = new Usuarios($_SESSION["Id_Cliente"]);
-
-            if ($user->getListaPrecioDef() == 1) {
-                $precio = $product->precio_venta_final_1;
-            } elseif ($user->getListaPrecioDef() == 2) {
-                $precio = $product->precio_venta_final_2;
-            } elseif ($user->getListaPrecioDef() == 3) {
-                $precio = $product->precio_venta_final_3;
-            } else {
-                $precio = $product->precio_venta_final_1;
-            }
-            
+            $precios = [
+                1 => $product->precio_venta_final_1,
+                2 => $product->precio_venta_final_2,
+                3 => $product->precio_venta_final_3,
+            ];
+            $precio = $precios[$user->getListaPrecioDef()] ?? $product->precio_venta_final_1;
         } else {
             $precio = $product->precio_venta_final_1;
         }
         
         // aumento %
-        if (isset($aumento) && !empty($aumento) && is_numeric($aumento) && $aumento > 0) {
+        if (filter_var($aumento, FILTER_VALIDATE_FLOAT) && $aumento > 0) {
             $precio = $precio + ($precio * ($aumento / 100));
         }
 
         if ($format) {
-            return number_format($precio, 2,',','.'); 
+            return number_format($precio, 2, ',', '.');
         }
 
-        return $precio; 
+        return $precio;
     }
 }
 

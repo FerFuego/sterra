@@ -75,39 +75,32 @@ class Productos {
         $config  = new Configuracion();
         $aumento = $config->getAumento();
         
-        if (isset($aumento) && !empty($aumento) && is_numeric($aumento) && $aumento > 0) {
-            // aumento %
-            return $precio + ($precio * ($aumento / 100));
+        if (filter_var($aumento, FILTER_VALIDATE_FLOAT) && $aumento > 0) {
+            $precio = $precio + ($precio * ($aumento / 100));
         }
 
         return $precio; 
     }
     
-    public function PreVta(){ 
+   public function PreVta(){
         $config  = new Configuracion();
         $aumento = $config->getAumento();
         
         // Usuario logueado
         if (isset($_SESSION["user"])) {
-
             $user = new Usuarios($_SESSION["Id_Cliente"]);
-
-            if ($user->getListaPrecioDef() == 1) {
-                $precio = $this->precio_venta_final_1;
-            } elseif ($user->getListaPrecioDef() == 2) {
-                $precio = $this->precio_venta_final_2;
-            } elseif ($user->getListaPrecioDef() == 3) {
-                $precio = $this->precio_venta_final_3;
-            } else {
-                $precio = $this->precio_venta_final_1;
-            }
-            
+            $precios = [
+                1 => $this->precio_venta_final_1,
+                2 => $this->precio_venta_final_2,
+                3 => $this->precio_venta_final_3,
+            ];
+            $precio = $precios[$user->getListaPrecioDef()] ?? $this->precio_venta_final_1;
         } else {
             $precio = $this->precio_venta_final_1;
         }
         
         // aumento %
-        if (isset($aumento) && !empty($aumento) && is_numeric($aumento) && $aumento > 0) {
+        if (filter_var($aumento, FILTER_VALIDATE_FLOAT) && $aumento > 0) {
             $precio = $precio + ($precio * ($aumento / 100));
         }
 
