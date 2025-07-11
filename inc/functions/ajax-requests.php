@@ -189,7 +189,7 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'updateProd
 
     $prod = new Productos($CodProducto);
 
-    var_dump($prod);
+    var_dump($CodProducto);
 
     if ( !$prod ) die('false');
 
