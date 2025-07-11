@@ -85,21 +85,18 @@ class Productos {
    public function PreVta(){
         $config  = new Configuracion();
         $aumento = $config->getAumento();
-        $producto = $this;        
-
         
         // Usuario logueado
         if (isset($_SESSION["user"])) {
             $user = new Usuarios($_SESSION["Id_Cliente"]);
             $listaPrecioDef = $user->getListaPrecioDef();
-            //var_dump($listaPrecioDef); // Verificar el valor de $listaPrecioDef
             $precios = [
-                1 =>  $producto->precio_venta_final_1,
-                2 =>  $producto->precio_venta_final_2,
-                3 =>  $producto->precio_venta_final_3,
+                1 => $this->precio_venta_final_1,
+                2 => $this->precio_venta_final_2,
+                3 => $this->precio_venta_final_3,
             ];
-            var_dump($precios);
             $precio = $precios[$listaPrecioDef] ?? $this->precio_venta_final_1;
+            var_dump($precio);
         } else {
             $precio = $this->precio_venta_final_1;
         }
