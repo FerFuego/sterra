@@ -156,10 +156,10 @@
             <div class="d-flex">
                 <div class="form-group w-100 pl-2">
                     <br>
-                    <label for="aumento_1">Lista de precios por defecto, solo aplica si se activa la opcion "Activar el regitros de usuarios".</label> 
+                    <label for="aumento_1">Lista de precios por defecto, solo aplica si se activa la opcion <span class="text-danger">"Activar el regitros de usuarios". </span></label> 
                 </div>
                 <div class="form-group w-100 pl-2">
-                    <label for="listaDefecto">Lista de precios</label> <br>
+                    <br>
                     <select name="listaDefecto" id="listaDefecto" class="form-control">
                         <option value="1" <?php if ($general->listaDefecto == 1) echo 'selected'; ?>>1</option>
                         <option value="2" <?php if ($general->listaDefecto == 2) echo 'selected'; ?>>2</option>
