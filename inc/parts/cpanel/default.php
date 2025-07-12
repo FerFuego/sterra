@@ -139,20 +139,6 @@
             </div>
             <div class="d-flex">
                 <div class="form-group w-100 pl-2">
-                    <br>
-                    <label for="aumento_1">Lista de precios por defecto, solo aplica si se activa la opcion "Activar el regitros de usuarios".</label> 
-                </div>
-                <div class="form-group w-100 pl-2">
-                    <label for="listaDefecto">Lista de precios</label> <br>
-                    <select name="listaDefecto" id="listaDefecto" class="form-control">
-                        <option value="1" <?php if ($general->listaDefecto == 1) echo 'selected'; ?>>1</option>
-                        <option value="2" <?php if ($general->listaDefecto == 2) echo 'selected'; ?>>2</option>
-                        <option value="3" <?php if ($general->listaDefecto == 3) echo 'selected'; ?>>3</option>
-                    </select>
-                </div>
-            </div>
-            <div class="d-flex">
-                <div class="form-group w-100 pl-2">
                     <label for="show_prices">Mostrar Precios en la tienda</label> 
                 </div>
                 <div class="form-group w-100 pl-2">
@@ -165,6 +151,20 @@
                 </div>
                 <div class="form-group w-100 pl-2">
                     <input type="checkbox" name="active_register" id="active_register" value="1" <?php echo $general->active_register ? 'checked' : ''; ?>>
+                </div>
+            </div>
+            <div class="d-flex">
+                <div class="form-group w-100 pl-2">
+                    <br>
+                    <label for="aumento_1">Lista de precios por defecto, solo aplica si se activa la opcion "Activar el regitros de usuarios".</label> 
+                </div>
+                <div class="form-group w-100 pl-2">
+                    <label for="listaDefecto">Lista de precios</label> <br>
+                    <select name="listaDefecto" id="listaDefecto" class="form-control">
+                        <option value="1" <?php if ($general->listaDefecto == 1) echo 'selected'; ?>>1</option>
+                        <option value="2" <?php if ($general->listaDefecto == 2) echo 'selected'; ?>>2</option>
+                        <option value="3" <?php if ($general->listaDefecto == 3) echo 'selected'; ?>>3</option>
+                    </select>
                 </div>
             </div>
             <div class="d-flex">
