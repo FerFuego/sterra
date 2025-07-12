@@ -820,6 +820,9 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'registerUs
         die('false');
     }
 
+    // Get Config
+    $config = new Configuracion();
+
     // Insert User
     $user = new Usuarios();
     $user->Id_Cliente = date('YmdHis');
@@ -829,7 +832,7 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'registerUs
     //$user->Password = md5($password);
     $user->Password = $password;
     $user->Localidad = $locality;
-    $user->ListaPrecioDef = 1;
+    $user->ListaPrecioDef = $config->getListaDefecto();
     $user->tipo = 0;
     $user->is_Admin = 0;
     $result = $user->insert();
