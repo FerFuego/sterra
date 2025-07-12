@@ -140,7 +140,7 @@
             <div class="d-flex">
                 <div class="form-group w-100 pl-2">
                     <br>
-                    <label for="aumento_1">Lista de precios por defecto</label> 
+                    <label for="aumento_1">Lista de precios por defecto, solo aplica si se activa la opcion "Activar el regitros de usuarios".</label> 
                 </div>
                 <div class="form-group w-100 pl-2">
                     <label for="lista">Lista de precios</label> <br>
