@@ -17,6 +17,7 @@ class Configuracion {
     public $instagram;
     public $twitter;
     public $aumento_1;
+    public $listaDefecto;
     public $minimo;
     public $descuentos;
     public $show_instagram;
@@ -44,6 +45,7 @@ class Configuracion {
         $this->instagram = $row['instagram'];
         $this->twitter = $row['twitter'];
         $this->aumento_1 = $row['aumento_1'];
+        $this->listaDefecto = $row['listaDefecto'];
         $this->minimo = $row['minimo'];
         $this->descuentos = $row['descuentos'];
         $this->show_instagram = $row['show_instagram'];
@@ -54,7 +56,7 @@ class Configuracion {
 
     public function update() {
         $this->obj = new sQuery();
-        $this->obj->executeQuery("UPDATE configuracion SET id = '$this->id', logo = '$this->logo', banner = '$this->banner', telefono = '$this->telefono', email = '$this->email', direccion = '$this->direccion', atencion = '$this->atencion', whatsapp = '$this->whatsapp', facebook = '$this->facebook', instagram = '$this->instagram', twitter = '$this->twitter', aumento_1 = '$this->aumento_1', minimo = '$this->minimo', descuentos = '$this->descuentos', show_instagram = '$this->show_instagram', show_prices = '$this->show_prices', promo_modal = '$this->promo_modal', active_register = '$this->active_register' WHERE (id = '1')");
+        $this->obj->executeQuery("UPDATE configuracion SET id = '$this->id', logo = '$this->logo', banner = '$this->banner', telefono = '$this->telefono', email = '$this->email', direccion = '$this->direccion', atencion = '$this->atencion', whatsapp = '$this->whatsapp', facebook = '$this->facebook', instagram = '$this->instagram', twitter = '$this->twitter', aumento_1 = '$this->aumento_1', listaDefecto = '$this->listaDefecto', minimo = '$this->minimo', descuentos = '$this->descuentos', show_instagram = '$this->show_instagram', show_prices = '$this->show_prices', promo_modal = '$this->promo_modal', active_register = '$this->active_register' WHERE (id = '1')");
     }
 
     public function deletePromoBanner() {
@@ -86,6 +88,10 @@ class Configuracion {
 
     public function getDescuentos(){
         return $this->descuentos;
+    }
+
+    public function getListaDefecto(){
+        return $this->listaDefecto;
     }
     
     public function closeConnection(){

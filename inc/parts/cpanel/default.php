@@ -139,6 +139,16 @@
             </div>
             <div class="d-flex">
                 <div class="form-group w-100 pl-2">
+                    <br>
+                    <label for="aumento_1">Lista de precios por defecto</label> 
+                </div>
+                <div class="form-group w-100 pl-2">
+                    <label for="lista">Lista de precios</label> <br>
+                    <input type="number" name="lista" id="lista" class="form-control" value="<?php echo $general->listaDefecto; ?>">
+                </div>
+            </div>
+            <div class="d-flex">
+                <div class="form-group w-100 pl-2">
                     <label for="show_prices">Mostrar Precios en la tienda</label> 
                 </div>
                 <div class="form-group w-100 pl-2">

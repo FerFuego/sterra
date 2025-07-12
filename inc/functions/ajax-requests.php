@@ -523,6 +523,7 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'operationC
     $facebook = (isset($_POST['facebook']) ? filter_var($_POST['facebook'], FILTER_UNSAFE_RAW) : null);
     $twitter = (isset($_POST['twitter']) ? filter_var($_POST['twitter'], FILTER_UNSAFE_RAW) : null);
     $aumento_1 = (isset($_POST['aumento_1']) ? filter_var($_POST['aumento_1'], FILTER_UNSAFE_RAW) : null);
+    $listaDefecto = (isset($_POST['listaDefecto']) ? filter_var($_POST['listaDefecto'], FILTER_UNSAFE_RAW) : null);
     $minimo = (isset($_POST['minimo']) ? filter_var($_POST['minimo'], FILTER_UNSAFE_RAW) : null);
     $descuentos = (isset($_POST['descuentos']) ? $_POST['descuentos'] : null);
     $show_prices = (isset($_POST['show_prices']) ? $_POST['show_prices'] : null);
@@ -598,6 +599,7 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'operationC
         $general->instagram = $instagram;
         $general->twitter = $twitter;
         $general->aumento_1 = $aumento_1;
+        $general->listaDefecto = $listaDefecto;
         $general->minimo = $minimo;
         $general->descuentos = $descuentos;
         $general->show_prices = $show_prices == '1' ? 1 : 0;
@@ -818,6 +820,9 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'registerUs
         die('false');
     }
 
+    // Get Config
+    $config = new Configuracion();
+
     // Insert User
     $user = new Usuarios();
     $user->Id_Cliente = date('YmdHis');
@@ -827,7 +832,7 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'registerUs
     //$user->Password = md5($password);
     $user->Password = $password;
     $user->Localidad = $locality;
-    $user->ListaPrecioDef = 1;
+    $user->ListaPrecioDef = $config->getListaDefecto();
     $user->tipo = 0;
     $user->is_Admin = 0;
     $result = $user->insert();
