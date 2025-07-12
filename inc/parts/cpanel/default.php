@@ -143,8 +143,8 @@
                     <label for="aumento_1">Lista de precios por defecto, solo aplica si se activa la opcion "Activar el regitros de usuarios".</label> 
                 </div>
                 <div class="form-group w-100 pl-2">
-                    <label for="lista">Lista de precios</label> <br>
-                    <input type="number" name="lista" id="lista" class="form-control" value="<?php echo $general->listaDefecto; ?>">
+                    <label for="listaDefecto">Lista de precios</label> <br>
+                    <input type="number" name="listaDefecto" id="listaDefecto" class="form-control" value="<?php echo $general->listaDefecto; ?>">
                 </div>
             </div>
             <div class="d-flex">
