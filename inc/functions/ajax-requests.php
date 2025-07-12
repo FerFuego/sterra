@@ -523,6 +523,7 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'operationC
     $facebook = (isset($_POST['facebook']) ? filter_var($_POST['facebook'], FILTER_UNSAFE_RAW) : null);
     $twitter = (isset($_POST['twitter']) ? filter_var($_POST['twitter'], FILTER_UNSAFE_RAW) : null);
     $aumento_1 = (isset($_POST['aumento_1']) ? filter_var($_POST['aumento_1'], FILTER_UNSAFE_RAW) : null);
+    $listaDefecto = (isset($_POST['listaDefecto']) ? filter_var($_POST['listaDefecto'], FILTER_UNSAFE_RAW) : null);
     $minimo = (isset($_POST['minimo']) ? filter_var($_POST['minimo'], FILTER_UNSAFE_RAW) : null);
     $descuentos = (isset($_POST['descuentos']) ? $_POST['descuentos'] : null);
     $show_prices = (isset($_POST['show_prices']) ? $_POST['show_prices'] : null);
@@ -598,6 +599,7 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'operationC
         $general->instagram = $instagram;
         $general->twitter = $twitter;
         $general->aumento_1 = $aumento_1;
+        $general->listaDefecto = $listaDefecto;
         $general->minimo = $minimo;
         $general->descuentos = $descuentos;
         $general->show_prices = $show_prices == '1' ? 1 : 0;

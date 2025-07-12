@@ -721,6 +721,7 @@ $(document).ready( function () {
             formData.append('facebook', values.facebook);
             formData.append('twitter', values.twitter);
             formData.append('aumento_1', values.aumento_1);
+            formData.append('listaDefecto', values.listaDefecto);
             formData.append('minimo', values.minimo);
             formData.append('show_prices', values.show_prices);
             formData.append('show_instagram', values.show_instagram);
