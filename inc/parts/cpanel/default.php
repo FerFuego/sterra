@@ -144,7 +144,11 @@
                 </div>
                 <div class="form-group w-100 pl-2">
                     <label for="listaDefecto">Lista de precios</label> <br>
-                    <input type="number" name="listaDefecto" id="listaDefecto" class="form-control" value="<?php echo $general->listaDefecto; ?>">
+                    <select name="listaDefecto" id="listaDefecto" class="form-control">
+                        <option value="1" <?php if ($general->listaDefecto == 1) echo 'selected'; ?>>1</option>
+                        <option value="2" <?php if ($general->listaDefecto == 2) echo 'selected'; ?>>2</option>
+                        <option value="3" <?php if ($general->listaDefecto == 3) echo 'selected'; ?>>3</option>
+                    </select>
                 </div>
             </div>
             <div class="d-flex">
