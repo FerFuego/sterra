@@ -19,7 +19,8 @@
         <div class="row">
             <div class="col-lg-12 mt-5">
                 <div class="section-title">
-                    <h2>Registro de Clientes</h2>
+                    <h2>Registro para Clientes Minoristas / Consumidor final</h2>
+                    <h3><strong>ATENCIÓN</strong>: si tiene un comercio, debe comunicarse por WhatsApp al <a href="https://wa.me/543537671725" target="_blank">+54 9 3537 671725</a> para registrarse y obtener un USUARIO con precios mayoristas.</h3>
                 </div>
             </div>
 
