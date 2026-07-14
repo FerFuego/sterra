@@ -152,7 +152,20 @@ class Productos {
 
     public function getProductSearch($opcion, $search) {
 
-        $query = "SELECT * FROM productos WHERE Nombre LIKE '%$search%' OR CodProducto LIKE '%$search%'";
+        $terminos = preg_split('/\s+/', trim($search), -1, PREG_SPLIT_NO_EMPTY);
+
+        if (empty($terminos)) {
+            $where = "1=0";
+        } else {
+            $condiciones = [];
+            foreach ($terminos as $t) {
+                $t = addslashes($t);
+                $condiciones[] = "(Nombre LIKE '%$t%' OR CodProducto LIKE '%$t%')";
+            }
+            $where = implode(' AND ', $condiciones);
+        }
+
+        $query = "SELECT * FROM productos WHERE $where";
 
         $this->obj = new sQuery();
         $result = $this->obj->executeQuery($query);

@@ -3,23 +3,42 @@
 /**
  * Autoload of Classes
  */
-spl_autoload_register( function ($class) {
+spl_autoload_register(function($class) {
     include 'class-' . strtolower($class) . '.php';
 });
 
-/*
- * Load .env
- */
-$root = $_SERVER['DOCUMENT_ROOT'];
-$envFilepath = "$root/.env";
 
-if (is_file($envFilepath)) {
-    $file = new \SplFileObject($envFilepath);
+// Posibles ubicaciones locales/remotas del .env
+$paths = [
+    __DIR__ . '/../.env',                         // Local dentro del proyecto
+    dirname(__DIR__, 2) . '/.env',                // Otra posibilidad si estás un nivel más arriba
+    $_SERVER['DOCUMENT_ROOT'] . '/.env',          // Hosting público
+];
 
-    // Loop until we reach the end of the file.
-    while (false === $file->eof()) {
-        // Get the current line value, trim it and save by putenv.
-        putenv(trim(str_replace('"', '', $file->fgets())));
+// DEBUG: Mostrar qué rutas se revisan
+$debug = "Buscando .env...\n";
+
+foreach ($paths as $path) {
+    $exists = is_file($path) ? "EXISTE" : "no existe";
+    $debug .= "Revisando: $path => $exists\n";
+
+    if (is_file($path)) {
+        // Cargar archivo .env
+        $file = new SplFileObject($path);
+
+        while (!$file->eof()) {
+            $line = trim(str_replace('"', '', $file->fgets()));
+
+            // Ignorar líneas vacías o comentarios
+            if ($line === '' || str_starts_with($line, '#')) {
+                continue;
+            }
+
+            putenv($line);
+        }
+
+        $debug .= ">>> CARGADO DESDE: $path\n";
+        break; // ya cargamos uno, no seguimos
     }
 }
 ?>
