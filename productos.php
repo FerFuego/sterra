@@ -92,7 +92,8 @@
                                     <span>Ordenar Por</span>
                                     <select name="order" id="select-order-prod">
                                         <option value="0">Defecto</option>
-                                        <option value="ASC" <?php echo ($order == 'ASC') ? 'selected' : ''; ?>>Menor Precio
+                                        <option value="ASC" <?php echo ($order == 'ASC') ? 'selected' : ''; ?>>Menor
+                                            Precio
                                         </option>
                                         <option value="DESC" <?php echo ($order == 'DESC') ? 'selected' : ''; ?>>Mayor
                                             Precio</option>
@@ -120,7 +121,7 @@
                     </div>
 
                     <!-- Paginador -->
-                    <?php echo $paginator->createLinks($links, $result['params'], 'product__pagination'); ?>
+                    <?php //echo $paginator->createLinks($links, $result['params'], 'product__pagination'); ?>
                     <!-- End Paginador -->
 
                 <?php else: ?>
@@ -128,7 +129,7 @@
                 <?php endif; ?>
 
                 <!-- Offer Section Begin -->
-                <?php //require_once('inc/parts/offert-section.php'); ?>
+                <?php require_once('inc/parts/offert-section.php'); ?>
                 <!-- Offer Section End -->
 
             </div>
