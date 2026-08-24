@@ -32,24 +32,31 @@
                 <div class="col-lg-12">
                     <?php if ((isset($_GET['id_rubro']) && $_GET['id_rubro'] != '') || 
                             (isset($_GET['id_subrubro']) && $_GET['id_subrubro'] != '') ||
-                            (isset($_GET['id_subrubro']) && $_GET['id_grupo'] != '')) : ?>
+                            (isset($_GET['id_grupo']) && $_GET['id_grupo'] != '')) : ?>
                         <h4>Filtrado por: 
                             <span class="mt-3 mb-0 text-success" style="font-size: 18px;">
 
                                 <?php if ( isset($_GET['id_rubro']) && $_GET['id_rubro'] != '') : 
-                                    $rubro = new Rubros($_GET['id_rubro']); ?>
-                                    <a href="productos.php?id_rubro=<?php echo $rubro->id_rubro; ?>" class="text-success"><?php echo $rubro->nombre; ?></a>
-                                <?php endif; ?>
+                                    $rubro = new Rubros($_GET['id_rubro']);
+                                    if ( !empty($rubro->id_rubro) ) : ?>
+                                        <a href="productos.php?id_rubro=<?php echo $rubro->id_rubro; ?>" class="text-success"><?php echo $rubro->nombre; ?></a>
+                                    <?php endif;
+                                endif; ?>
 
                                 <?php if ( isset($_GET['id_subrubro']) && $_GET['id_subrubro'] != '') : 
-                                    $subrubro = new Subrubros($_GET['id_subrubro']); ?>
-                                    / <a href="productos.php?id_rubro=<?php echo $rubro->id_rubro; ?>&id_subrubro=<?php echo $subrubro->id_subrubro; ?>" class="text-success"><?php echo $subrubro->nombre; ?></a>
-                                <?php endif; ?>
+                                    $subrubro = new Subrubros($_GET['id_subrubro']);
+                                    if ( !empty($subrubro->id_subrubro) ) :
+                                        $parentRubroId = isset($rubro->id_rubro) ? $rubro->id_rubro : $subrubro->id_rubro; ?>
+                                        / <a href="productos.php?id_rubro=<?php echo $parentRubroId; ?>&id_subrubro=<?php echo $subrubro->id_subrubro; ?>" class="text-success"><?php echo $subrubro->nombre; ?></a>
+                                    <?php endif;
+                                endif; ?>
 
                                 <?php if ( isset($_GET['id_grupo']) && $_GET['id_grupo'] != '') :
-                                    $grupo = new Grupos($_GET['id_grupo']); ?>
-                                    <?php echo ' / ' . $grupo->nombre; ?>
-                                <?php endif; ?>
+                                    $grupo = new Grupos($_GET['id_grupo']);
+                                    if ( !empty($grupo->nombre) ) : ?>
+                                        <?php echo ' / ' . $grupo->nombre; ?>
+                                    <?php endif;
+                                endif; ?>
                             </span>
                         </h4>
                     <?php endif; ?>

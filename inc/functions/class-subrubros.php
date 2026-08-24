@@ -16,12 +16,13 @@ class Subrubros {
             
             $this->obj = new sQuery();
             $result = $this->obj->executeQuery("SELECT * FROM subrubros WHERE Id_SubRubro='$id' ORDER BY Nombre");
-            $row = mysqli_fetch_assoc($result);
-    
-            $this->id_subrubro = $row['Id_SubRubro'];
-            $this->id_rubro = $row['Id_Rubro'];
-            $this->nombre   = $row['Nombre'];
-            $this->no_borra = $row['NoBorra'];
+            if ($result && mysqli_num_rows($result) > 0) {
+                $row = mysqli_fetch_assoc($result);
+                $this->id_subrubro = $row['Id_SubRubro'];
+                $this->id_rubro = $row['Id_Rubro'];
+                $this->nombre   = $row['Nombre'];
+                $this->no_borra = $row['NoBorra'];
+            }
         }
     }
 

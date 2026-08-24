@@ -2,11 +2,8 @@
 
 <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6">
     <div class="product__item">
-        <div class="product__item__pic set-bg" data-setbg="<?php echo Productos::getImage($product->CodProducto); ?>">
-            <a href="detalle.php?id=<?php echo $product->CodProducto; ?>">
-                <img class="product__details__pic__item--large"
-                    src="<?php echo Productos::getImage($product->CodProducto); ?>" alt="">
-            </a>
+        <div class="product__item__pic set-bg" data-setbg="<?php echo Productos::getImage($product->CodProducto); ?>" style="background-image: url('<?php echo Productos::getImage($product->CodProducto); ?>');">
+            <a href="detalle.php?id=<?php echo $product->CodProducto; ?>" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;"></a>
             <!-- <div class="product__discount__percent">-20%</div> -->
             <div class="product__code">
                 <h5><?php echo 'COD: ' . $product->CodProducto; ?></h5>

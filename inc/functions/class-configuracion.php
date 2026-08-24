@@ -45,7 +45,7 @@ class Configuracion {
         $this->instagram = $row['instagram'];
         $this->twitter = $row['twitter'];
         $this->aumento_1 = $row['aumento_1'];
-        $this->listaDefecto = $row['listaDefecto'];
+        $this->listaDefecto = $row['listaDefecto'] ?? 1;
         $this->minimo = $row['minimo'];
         $this->descuentos = $row['descuentos'];
         $this->show_instagram = $row['show_instagram'];

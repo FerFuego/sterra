@@ -2,7 +2,7 @@
     $offert = new Productos();
     $results = $offert->getProductsOffert($id_rubro, $id_subrubro, $id_grupo);
 
-    if ( $results->num_rows > 0 ) : ?>
+    if ( $results && $results->num_rows > 0 ) : ?>
 
         <div class="product__discount">
             <div class="section-title product__discount__title">

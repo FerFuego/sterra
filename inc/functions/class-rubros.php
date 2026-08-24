@@ -15,11 +15,12 @@ class Rubros {
             
             $this->obj = new sQuery();
             $result = $this->obj->executeQuery("SELECT * FROM rubros WHERE Id_Rubro = '$id' ORDER BY Nombre");
-            $row = mysqli_fetch_assoc($result);
-    
-            $this->id_rubro = $row['Id_Rubro'];
-            $this->nombre   = $row['Nombre'];
-            $this->no_borra = $row['NoBorra'];
+            if ($result && mysqli_num_rows($result) > 0) {
+                $row = mysqli_fetch_assoc($result);
+                $this->id_rubro = $row['Id_Rubro'];
+                $this->nombre   = $row['Nombre'];
+                $this->no_borra = $row['NoBorra'];
+            }
         }
     }
 
