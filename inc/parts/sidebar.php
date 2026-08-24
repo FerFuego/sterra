@@ -21,8 +21,9 @@
                     <input type="submit" class="site-btn-min" value="Filtrar">
                 </form>
 
-                <?php if ( isset($minamount) || isset($maxamount) ) : ?>
-                    <p class="mt-3 mb-0 text-success">Filtrado de $<?php echo $minamount; ?> a $<?php echo $maxamount; ?>.-</p>
+                <?php if (isset($minamount) || isset($maxamount)): ?>
+                    <p class="mt-3 mb-0 text-success">Filtrado de $<?php echo $minamount; ?> a $<?php echo $maxamount; ?>.-
+                    </p>
                 <?php endif; ?>
 
             </div>
@@ -31,18 +32,19 @@
     <div class="sidebar__item d-none d-sm-block">
         <h4>Categorías</h4>
         <ul>
-            <?php 
-                $rubros = new Rubros();
-                $result = $rubros->getRubros();
+            <?php
+            $rubros = new Rubros();
+            $result = $rubros->getRubros();
 
-                while ( $rubro = $result->fetch_object() ) : ?>
-                    <li>
-                        <a href="productos.php?id_rubro=<?php echo $rubro->Id_Rubro; ?>" id="<?php echo $rubro->Id_Rubro; ?>" data-rubro="<?php echo $rubro->Id_Rubro; ?>" class="item sublistCTA">
-                            <?php echo $rubro->Nombre; ?>
-                            <span></span>
-                        </a>
-                        <div class="sublist"></div>
-                    </li>
+            while ($rubro = $result->fetch_object()): ?>
+                <li>
+                    <a href="productos.php?id_rubro=<?php echo $rubro->Id_Rubro; ?>" id="<?php echo $rubro->Id_Rubro; ?>"
+                        data-rubro="<?php echo $rubro->Id_Rubro; ?>" class="item sublistCTA">
+                        <?php echo $rubro->Nombre; ?>
+                        <span></span>
+                    </a>
+                    <div class="sublist"></div>
+                </li>
             <?php endwhile; ?>
         </ul>
     </div>
@@ -114,24 +116,24 @@
     </div> -->
 
     <?php
-        $news = new Productos();
-        $results = $news->getProductNews(10);
+    //$news = new Productos();
+    //$results = $news->getProductNews(10);
+    
+    //if ( $results->num_rows > 0 ) : ?>
 
-        if ( $results->num_rows > 0 ) : ?>
-
-            <div class="sidebar__item d-none d-sm-block">
+    <!-- <div class="sidebar__item d-none d-sm-block">
                 <div class="latest-product__text">
                     <h4>Últimos Productos</h4>
                     <div class="latest-product__slider owl-carousel">
-                        <?php   
-                            while ( $product = $results->fetch_object() ) :
-                                require 'inc/partials/sidebar-card.php';
-                            endwhile;
+                        <?php
+                        // while ( $product = $results->fetch_object() ) :
+                        //     require 'inc/partials/sidebar-card.php';
+                        // endwhile;
                         ?>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
-    <?php endif; ?>
+    <?php //endif; ?>
 
 </div>
