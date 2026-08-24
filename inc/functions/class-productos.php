@@ -111,19 +111,21 @@ class Productos {
     public function getProducts($opcion, $id_rubro, $id_subrubro, $id_grupo, $minamount, $maxamount, $order){
 
         $where = '1=1';
-        $where .= ( $id_rubro ) ? ' AND Id_Rubro='. $id_rubro : '';
-        $where .= ( $id_subrubro ) ? ' AND Id_SubRubro='. $id_subrubro : '';
-        $where .= ( $id_grupo ) ? ' AND Id_Grupo='. $id_grupo : '';
-        $where .= ( $minamount && $maxamount ) ? ' AND PreVtaFinal1 BETWEEN '.$minamount.' AND '.$maxamount : '';
+        $where .= ( $id_rubro ) ? ' AND Id_Rubro='. (int)$id_rubro : '';
+        $where .= ( $id_subrubro ) ? ' AND Id_SubRubro='. (int)$id_subrubro : '';
+        $where .= ( $id_grupo ) ? ' AND Id_Grupo='. (int)$id_grupo : '';
+        $where .= ( $minamount && $maxamount ) ? ' AND PreVtaFinal1 BETWEEN '.(float)$minamount.' AND '.(float)$maxamount : '';
         $orderBy = ( $order ) ? ' ORDER BY PreVtaFinal1 '.$order : ' ORDER BY Nombre';
 
         $query = "SELECT * FROM productos WHERE $where $orderBy";
 
         $this->obj = new sQuery();
-        $this->obj->executeQuery($query);
+        $countRes = $this->obj->executeQuery("SELECT COUNT(*) as total FROM productos WHERE $where");
+        $totalRow = ($countRes) ? mysqli_fetch_assoc($countRes) : null;
+        $total = $totalRow['total'] ?? 0;
 
         $result = [
-            'total' => $this->obj->getResultados(),
+            'total' => $total,
             'query' => $query,
             'params' => ($opcion ? 'opcion='. $opcion .'&' : null).'id_rubro='.$id_rubro.'&id_subrubro='.$id_subrubro.'&id_grupo='.$id_grupo. (($minamount && $maxamount) ? '&minamount='.$minamount.'&maxamount='.$maxamount : '') . (($order) ? '&order='.$order : '')
         ];
@@ -133,8 +135,9 @@ class Productos {
 
     public function getCountProducts(){
         $this->obj = new sQuery();
-        $this->obj->executeQuery("SELECT * FROM productos");
-        return $this->obj->getResultados();
+        $countRes = $this->obj->executeQuery("SELECT COUNT(*) as total FROM productos");
+        $totalRow = ($countRes) ? mysqli_fetch_assoc($countRes) : null;
+        return $totalRow['total'] ?? 0;
     }
 
     public static function getImage($CodProducto) {
@@ -168,10 +171,12 @@ class Productos {
         $query = "SELECT * FROM productos WHERE $where";
 
         $this->obj = new sQuery();
-        $result = $this->obj->executeQuery($query);
+        $countRes = $this->obj->executeQuery("SELECT COUNT(*) as total FROM productos WHERE $where");
+        $totalRow = ($countRes) ? mysqli_fetch_assoc($countRes) : null;
+        $total = $totalRow['total'] ?? 0;
 
         $result = [
-            'total' => $this->obj->getResultados(),
+            'total' => $total,
             'query' => $query,
             'params' => ($opcion ? 'opcion='. $opcion .'&' : null).'s='.$search
         ];

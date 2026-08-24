@@ -22,18 +22,18 @@ class Usuarios {
             $this->obj = new sQuery();
             $result = $this->obj->executeQuery("SELECT * FROM clientes WHERE Id_Cliente = '$id'");
             
-            if ($result->num_rows == 0)  return $result;
-
-            $row = mysqli_fetch_assoc($result);
-            $this->Id_Cliente = $row['Id_Cliente'];
-            $this->Nombre = $row['Nombre'];
-            $this->Localidad = $row['Localidad'];
-            $this->Mail = $row['Mail'];
-            $this->Usuario = $row['Usuario'];
-            $this->Password = $row['Password'];
-            $this->ListaPrecioDef = $row['ListaPrecioDef'];
-            $this->tipo = $row['tipo'];
-            $this->is_Admin = $row['is_admin'];
+            if ($result && $result->num_rows > 0) {
+                $row = mysqli_fetch_assoc($result);
+                $this->Id_Cliente = $row['Id_Cliente'] ?? null;
+                $this->Nombre = $row['Nombre'] ?? '';
+                $this->Localidad = $row['Localidad'] ?? '';
+                $this->Mail = $row['Mail'] ?? '';
+                $this->Usuario = $row['Usuario'] ?? '';
+                $this->Password = $row['Password'] ?? '';
+                $this->ListaPrecioDef = $row['ListaPrecioDef'] ?? 1;
+                $this->tipo = $row['tipo'] ?? 1;
+                $this->is_Admin = $row['is_admin'] ?? 0;
+            }
         }
     }
 

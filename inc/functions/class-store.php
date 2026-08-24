@@ -33,7 +33,7 @@ Class Store {
     }
 
     public static function get_slug($string) {
-        return strtolower( str_replace( ' ', '-', $string ) );
+        return strtolower( str_replace( ' ', '-', $string ?? '' ) );
     }
 
     public static function getItemsSession() {
@@ -219,26 +219,30 @@ Class Store {
         $config  = new Configuracion();
         $aumento = $config->getAumento();
         
+        $p1 = $product->precio_venta_final_1 ?? $product->PreVtaFinal1 ?? 0;
+        $p2 = $product->precio_venta_final_2 ?? $product->PreVtaFinal2 ?? 0;
+        $p3 = $product->precio_venta_final_3 ?? $product->PreVtaFinal3 ?? 0;
+
         // Usuario logueado
         if (isset($_SESSION["user"])) {
             $user = new Usuarios($_SESSION["Id_Cliente"]);
             $precios = [
-                1 => $product->precio_venta_final_1,
-                2 => $product->precio_venta_final_2,
-                3 => $product->precio_venta_final_3,
+                1 => $p1,
+                2 => $p2,
+                3 => $p3,
             ];
-            $precio = $precios[$user->getListaPrecioDef()] ?? $product->precio_venta_final_1;
+            $precio = $precios[$user->getListaPrecioDef()] ?? $p1;
         } else {
-            $precio = $product->precio_venta_final_1;
+            $precio = $p1;
         }
         
         // aumento %
         if (filter_var($aumento, FILTER_VALIDATE_FLOAT) && $aumento > 0) {
-            $precio = $precio + ($precio * ($aumento / 100));
+            $precio = (float)$precio + ((float)$precio * ($aumento / 100));
         }
 
         if ($format) {
-            return number_format($precio, 2, ',', '.');
+            return number_format((float)$precio, 2, ',', '.');
         }
 
         return $precio;

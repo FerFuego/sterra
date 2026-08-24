@@ -5,7 +5,7 @@
  */
 class Connection {
 
-    var $conn;
+    public $conn;
     
 	function __construct() {
 
@@ -29,7 +29,9 @@ class Connection {
     
     // cierra la conexion
     function Close() {
-		mysqli_close($this->conn);
+		if ($this->conn) {
+			@mysqli_close($this->conn);
+		}
 	}	
 }
 ?>

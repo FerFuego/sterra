@@ -27,23 +27,25 @@ class Pedidos {
         if ($id != 0) {
             $this->obj = new sQuery();
             $result = $this->obj->executeQuery("SELECT * FROM pedidos_cabe WHERE Id_Pedido = '$id'");
-            $row    = mysqli_fetch_assoc($result);
+            if ($result && mysqli_num_rows($result) > 0) {
+                $row = mysqli_fetch_assoc($result);
 
-            $this->Id_Pedido = $row['Id_Pedido'];
-            $this->Id_Cliente = $row['Id_Cliente'];
-            $this->Nombre = $row['Nombre'];
-            $this->Localidad = $row['Localidad'];
-            $this->Mail = $row['Mail'];
-            $this->Telefono = $row['Telefono'];
-            $this->Usuario = $row['Usuario'];
-            $this->FechaIni = $row['FechaIni'];
-            $this->FechaFin = $row['FechaFin'];
-            $this->SubTotal = $row['SubTotal'];
-            $this->Descuento = $row['Descuento'];
-            $this->PctDescuento = $row['PctDescuento'];
-            $this->ImpTotal = $row['ImpTotal'];
-            $this->Cerrado = $row['Cerrado'];
-            $this->IP = $row['IP'];
+                $this->Id_Pedido = $row['Id_Pedido'] ?? null;
+                $this->Id_Cliente = $row['Id_Cliente'] ?? null;
+                $this->Nombre = $row['Nombre'] ?? '';
+                $this->Localidad = $row['Localidad'] ?? '';
+                $this->Mail = $row['Mail'] ?? '';
+                $this->Telefono = $row['Telefono'] ?? '';
+                $this->Usuario = $row['Usuario'] ?? '';
+                $this->FechaIni = $row['FechaIni'] ?? null;
+                $this->FechaFin = $row['FechaFin'] ?? null;
+                $this->SubTotal = $row['SubTotal'] ?? 0;
+                $this->Descuento = $row['Descuento'] ?? 0;
+                $this->PctDescuento = $row['PctDescuento'] ?? 0;
+                $this->ImpTotal = $row['ImpTotal'] ?? 0;
+                $this->Cerrado = $row['Cerrado'] ?? 0;
+                $this->IP = $row['IP'] ?? '';
+            }
         }
     }
 
