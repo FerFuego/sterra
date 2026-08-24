@@ -15,13 +15,14 @@ class Paginator {
 
     public function getData( $limit = 10, $page = 1 ) {
      
-        $this->limit = $limit;
-        $this->page = $page;
+        $this->limit = ($limit === 'all') ? 'all' : max(1, (int)$limit);
+        $this->page = max(1, (int)$page);
      
-        if ( $this->limit == 'all' ) {
+        if ( $this->limit === 'all' ) {
             $query = $this->query;
         } else {
-            $query = $this->query . " LIMIT " . ( ( $this->page - 1 ) * $this->limit ) . ", $this->limit";
+            $offset = max(0, ( $this->page - 1 ) * $this->limit);
+            $query = $this->query . " LIMIT " . $offset . ", " . $this->limit;
         }
 
         $this->obj = new sQuery();
@@ -32,21 +33,27 @@ class Paginator {
 
     public function createLinks( $links, $params, $list_class ) {
 
-        if ( $this->limit == 'all' ) {
+        if ( $this->limit === 'all' || (int)$this->total <= 0 || (int)$this->limit <= 0 ) {
             return '';
         }
      
-        $last = ceil( $this->total / $this->limit );
+        $last = (int) ceil( (int)$this->total / (int)$this->limit );
+        if ( $last <= 1 ) {
+            return '';
+        }
      
-        $start = ( ( $this->page - $links ) > 0 ) ? $this->page - $links : 1;
-        $end = ( ( $this->page + $links ) < $last ) ? $this->page + $links : $last;
+        $currentPage = min(max(1, (int)$this->page), $last);
+        $links = max(1, (int)$links);
+
+        $start = ( ( $currentPage - $links ) > 0 ) ? $currentPage - $links : 1;
+        $end = ( ( $currentPage + $links ) < $last ) ? $currentPage + $links : $last;
      
         $html = '<div class="' . $list_class . '">';
 
-        if ( $this->page == 1 ) {
+        if ( $currentPage <= 1 ) {
             $html .= '<a>&laquo;</a>';
         } else {
-            $html .= '<a href="?'.$params.'&page=' . ( $this->page - 1 ) . '">&laquo;</a>';
+            $html .= '<a href="?'.$params.'&page=' . ( $currentPage - 1 ) . '">&laquo;</a>';
         }
      
         if ( $start > 1 ) {
@@ -55,7 +62,7 @@ class Paginator {
         }
      
         for ( $i = $start ; $i <= $end; $i++ ) {
-            if ( $this->page == $i ) {
+            if ( $currentPage == $i ) {
                 $html .= '<a class="active">' . $i . '</a>';
             } else {
                 $html .= '<a href="?'.$params.'&page=' . $i . '">' . $i . '</a>';
@@ -67,10 +74,10 @@ class Paginator {
             $html .= '<a href="?'.$params.'&page=' . $last . '">' . $last . '</a>';
         }
      
-       if ( $this->page == $last ) {
+       if ( $currentPage >= $last ) {
            $html .= '<a>&raquo;</a>';
        } else {
-           $html .= '<a href="?'.$params.'&page=' . ( $this->page + 1 ) . '">&raquo;</a>';
+           $html .= '<a href="?'.$params.'&page=' . ( $currentPage + 1 ) . '">&raquo;</a>';
        }
 
         $html .= '</div>';

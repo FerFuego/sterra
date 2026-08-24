@@ -11,7 +11,7 @@
     $minamount  = (isset($_GET["minamount"])    ? filter_var(str_replace('$','',$_GET["minamount"]),   FILTER_UNSAFE_RAW) : null);
     $maxamount  = (isset($_GET["maxamount"])    ? filter_var(str_replace('$','',$_GET["maxamount"]),   FILTER_UNSAFE_RAW) : null);
     $order      = (isset($_GET['order'])        ? filter_var($_GET['order'],       FILTER_UNSAFE_RAW) : "");
-    $page       = (isset($_GET["page"])         ? filter_var($_GET["page"],        FILTER_UNSAFE_RAW) : 1);
+    $page       = (isset($_GET["page"]) && (int)$_GET["page"] > 0) ? (int)$_GET["page"] : 1;
     $search     = (isset($_GET['s'])            ? filter_var($_GET['s'],           FILTER_UNSAFE_RAW) : "");
     $opcion     = (isset($_GET['opcion'])       ? filter_var($_GET['opcion'],      FILTER_UNSAFE_RAW) : "");
     $limit      = 21; //Limito la busqueda
