@@ -1,24 +1,31 @@
 <?php
 /**
  * Connection class
- * crea la conexion a la base de datos
+ * crea la conexion a la base de datos con reutilización de conexión por petición
  */
 class Connection {
 
     public $conn;
+    private static $sharedConn = null;
     
 	function __construct() {
 
-		$con['server'] = getenv('SERVER');
-		$con['base'] = getenv('BASE');
-		$con['user'] = getenv('USER');
-		$con['pass'] = getenv('PASS');
+        if (self::$sharedConn !== null && self::$sharedConn instanceof mysqli && @self::$sharedConn->ping()) {
+            $this->conn = self::$sharedConn;
+            return;
+        }
 
-		$result = new mysqli($con['server'], $con['user'], $con['pass'], $con['base']);
+		$con['server'] = getenv('SERVER');
+		$con['base']   = getenv('BASE');
+		$con['user']   = getenv('USER');
+		$con['pass']   = getenv('PASS');
+
+		$result = @new mysqli($con['server'], $con['user'], $con['pass'], $con['base']);
         
-        if ($result) {	
+        if ($result && !$result->connect_errno) {	
 			$result->query("SET NAMES 'utf8'");		
 			$this->conn = $result;
+            self::$sharedConn = $result;
 		}
 	}
 
@@ -29,9 +36,7 @@ class Connection {
     
     // cierra la conexion
     function Close() {
-		if ($this->conn) {
-			@mysqli_close($this->conn);
-		}
+		// Se mantiene abierta para reutilizar durante la petición HTTP
 	}	
 }
 ?>
