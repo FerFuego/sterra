@@ -30,30 +30,34 @@
             </div>
             <div class="col-lg-9 col-md-7">
                 <div class="col-lg-12">
-                    <?php if ((isset($_GET['id_rubro']) && $_GET['id_rubro'] != '') || 
-                            (isset($_GET['id_subrubro']) && $_GET['id_subrubro'] != '') ||
-                            (isset($_GET['id_grupo']) && $_GET['id_grupo'] != '')) : ?>
-                        <h4>Filtrado por: 
+                    <?php if (
+                        (isset($_GET['id_rubro']) && $_GET['id_rubro'] != '') ||
+                        (isset($_GET['id_subrubro']) && $_GET['id_subrubro'] != '') ||
+                        (isset($_GET['id_grupo']) && $_GET['id_grupo'] != '')
+                    ): ?>
+                        <h4>Filtrado por:
                             <span class="mt-3 mb-0 text-success" style="font-size: 18px;">
 
-                                <?php if ( isset($_GET['id_rubro']) && $_GET['id_rubro'] != '') : 
+                                <?php if (isset($_GET['id_rubro']) && $_GET['id_rubro'] != ''):
                                     $rubro = new Rubros($_GET['id_rubro']);
-                                    if ( !empty($rubro->id_rubro) ) : ?>
-                                        <a href="productos.php?id_rubro=<?php echo $rubro->id_rubro; ?>" class="text-success"><?php echo $rubro->nombre; ?></a>
+                                    if (!empty($rubro->id_rubro)): ?>
+                                        <a href="productos.php?id_rubro=<?php echo $rubro->id_rubro; ?>"
+                                            class="text-success"><?php echo $rubro->nombre; ?></a>
                                     <?php endif;
                                 endif; ?>
 
-                                <?php if ( isset($_GET['id_subrubro']) && $_GET['id_subrubro'] != '') : 
+                                <?php if (isset($_GET['id_subrubro']) && $_GET['id_subrubro'] != ''):
                                     $subrubro = new Subrubros($_GET['id_subrubro']);
-                                    if ( !empty($subrubro->id_subrubro) ) :
+                                    if (!empty($subrubro->id_subrubro)):
                                         $parentRubroId = isset($rubro->id_rubro) ? $rubro->id_rubro : $subrubro->id_rubro; ?>
-                                        / <a href="productos.php?id_rubro=<?php echo $parentRubroId; ?>&id_subrubro=<?php echo $subrubro->id_subrubro; ?>" class="text-success"><?php echo $subrubro->nombre; ?></a>
+                                        / <a href="productos.php?id_rubro=<?php echo $parentRubroId; ?>&id_subrubro=<?php echo $subrubro->id_subrubro; ?>"
+                                            class="text-success"><?php echo $subrubro->nombre; ?></a>
                                     <?php endif;
                                 endif; ?>
 
-                                <?php if ( isset($_GET['id_grupo']) && $_GET['id_grupo'] != '') :
+                                <?php if (isset($_GET['id_grupo']) && $_GET['id_grupo'] != ''):
                                     $grupo = new Grupos($_GET['id_grupo']);
-                                    if ( !empty($grupo->nombre) ) : ?>
+                                    if (!empty($grupo->nombre)): ?>
                                         <?php echo ' / ' . $grupo->nombre; ?>
                                     <?php endif;
                                 endif; ?>
@@ -62,17 +66,17 @@
                     <?php endif; ?>
                 </div>
 
-                <?php 
-                    if ( $search != '') {
-                        $productos = new Productos();
-                        $result    = $productos->getProductSearch(null, $search);
-                    } else {
-                        $productos = new Productos();
-                        $result    = $productos->getProducts(null, $id_rubro, $id_subrubro, $id_grupo, $minamount, $maxamount, $order);
-                    }
+                <?php
+                if ($search != '') {
+                    $productos = new Productos();
+                    $result = $productos->getProductSearch(null, $search);
+                } else {
+                    $productos = new Productos();
+                    $result = $productos->getProducts(null, $id_rubro, $id_subrubro, $id_grupo, $minamount, $maxamount, $order);
+                }
 
-                    $paginator = new Paginator( $result['query'], $result['total'] );
-                    $results   = $paginator->getData( $limit, $page );
+                $paginator = new Paginator($result['query'], $result['total']);
+                $results = $paginator->getData($limit, $page);
                 ?>
 
                 <div class="filter__item">
@@ -88,40 +92,43 @@
                                     <span>Ordenar Por</span>
                                     <select name="order" id="select-order-prod">
                                         <option value="0">Defecto</option>
-                                        <option value="ASC" <?php echo ($order == 'ASC') ? 'selected': ''; ?>>Menor Precio</option>
-                                        <option value="DESC" <?php echo ($order == 'DESC') ? 'selected': ''; ?>>Mayor Precio</option>
+                                        <option value="ASC" <?php echo ($order == 'ASC') ? 'selected' : ''; ?>>Menor Precio
+                                        </option>
+                                        <option value="DESC" <?php echo ($order == 'DESC') ? 'selected' : ''; ?>>Mayor
+                                            Precio</option>
                                     </select>
                                 </div>
                             </form>
                         </div>
                         <div class="col-lg-8 col-md-7">
                             <div class="filter__found mt-1">
-                                <h6 class="text-right"><span><?php echo $result['total']; ?></span> Productos encontrados</h6>
+                                <h6 class="text-right"><span><?php echo $result['total']; ?></span> Productos
+                                    encontrados</h6>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <?php if ( $results->num_rows > 0 ) : ?>
+                <?php if ($results->num_rows > 0): ?>
 
                     <div class="row">
                         <?php
-                            while ( $product = $results->fetch_object() ) :
-                                require 'inc/partials/product.php';
-                            endwhile;
+                        while ($product = $results->fetch_object()):
+                            require 'inc/partials/product.php';
+                        endwhile;
                         ?>
                     </div>
 
                     <!-- Paginador -->
-                    <?php echo $paginator->createLinks( $links, $result['params'], 'product__pagination' ); ?>
+                    <?php echo $paginator->createLinks($links, $result['params'], 'product__pagination'); ?>
                     <!-- End Paginador -->
 
-                <?php else : ?>
+                <?php else: ?>
                     <h4>No se encontraron productos en esta categoría</h4>
                 <?php endif; ?>
 
                 <!-- Offer Section Begin -->
-                <?php require_once('inc/parts/offert-section.php'); ?>
+                <?php //require_once('inc/parts/offert-section.php'); ?>
                 <!-- Offer Section End -->
 
             </div>
