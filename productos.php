@@ -121,7 +121,7 @@
                     </div>
 
                     <!-- Paginador -->
-                    <?php //echo $paginator->createLinks($links, $result['params'], 'product__pagination'); ?>
+                    <?php echo $paginator->createLinks($links, $result['params'], 'product__pagination'); ?>
                     <!-- End Paginador -->
 
                 <?php else: ?>
