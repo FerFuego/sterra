@@ -5,7 +5,7 @@
         <div class="product__item__pic set-bg" data-setbg="<?php echo Productos::getImage($product->CodProducto); ?>">
             <a href="detalle.php?id=<?php echo $product->CodProducto; ?>">
                 <img class="product__details__pic__item--large"
-                    src="<?php echo Productos::getImage($product->getCode()); ?>" alt="">
+                    src="<?php echo Productos::getImage($product->CodProducto); ?>" alt="">
             </a>
             <!-- <div class="product__discount__percent">-20%</div> -->
             <div class="product__code">
@@ -34,7 +34,8 @@
 
             <?php if ($general->showPrices()): ?>
                 <p class="text-danger">
-                    <?php echo 'Precio Lista: <strong>$ ' . Store::checkUserCapabilities($prod) . '</strong>'; ?></p>
+                    <?php echo 'Precio Lista: <strong>$ ' . Store::checkUserCapabilities($prod) . '</strong>'; ?>
+                </p>
             <?php endif; ?>
 
             <?php if ($general->showLoginPrices()): ?>
