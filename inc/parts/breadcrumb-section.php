@@ -1,4 +1,5 @@
-<section class="breadcrumb-section set-bg" data-setbg="<?php echo $general->banner; ?>">
+<?php $bgBanner = (!empty($general->banner)) ? $general->banner : 'img/breadcrumb.jpg'; ?>
+<section class="breadcrumb-section set-bg" data-setbg="<?php echo $bgBanner; ?>" style="background-image: url('<?php echo $bgBanner; ?>');">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">

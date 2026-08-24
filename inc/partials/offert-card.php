@@ -1,7 +1,7 @@
 <div class="col-lg-4">
     <div class="product__discount__item">
-        <div class="product__discount__item__pic set-bg"
-            data-setbg="img/product/product-5.jpg">
+        <?php $imgOffert = Productos::getImage($product->CodProducto); ?>
+        <div class="product__discount__item__pic set-bg" data-setbg="<?php echo $imgOffert; ?>" style="background-image: url('<?php echo $imgOffert; ?>');">
             <div class="product__discount__percent">-20%</div>
             <ul class="product__item__pic__hover">
                 <li><a href="#"><i class="fa fa-heart"></i></a></li>

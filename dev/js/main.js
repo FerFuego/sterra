@@ -25,10 +25,17 @@
     /*------------------
         Background Set
     --------------------*/
-    $('.set-bg').each(function () {
-        var bg = $(this).data('setbg');
-        $(this).css('background-image', 'url(' + bg + ')');
-    });
+    function applySetBg() {
+        $('.set-bg').each(function () {
+            var bg = $(this).attr('data-setbg') || $(this).data('setbg');
+            if (bg && bg !== 'undefined' && bg.trim() !== '') {
+                $(this).css('background-image', 'url("' + bg + '")');
+            }
+        });
+    }
+    applySetBg();
+    $(document).ready(applySetBg);
+    $(window).on('load', applySetBg);
 
     //Humberger Menu
     $(".humberger__open").on('click', function () {
