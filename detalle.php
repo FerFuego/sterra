@@ -61,7 +61,11 @@
 
                             <h4>Cód.: <?php echo $product->getCode(); ?></h4>
 
-                            <?php if ($general->showLoginPrices() && $product->getStock() > 0): ?>
+                            <?php
+                                $allowNoStock = $general->allowNoStock();
+                                $canAdd = $product->getStock() > 0 || $allowNoStock;
+                            ?>
+                            <?php if ($general->showLoginPrices() && $canAdd): ?>
                                 <form class="js-form-cart">
                                     <div class="product__details__price">$<?php echo number_format($product->PreVta(), 2,',','.'); ?></div>
                                     <input type="hidden" name="id_product" value="<?php echo $product->getID(); ?>">
@@ -76,7 +80,7 @@
                                     <div class="product__details__quantity">
                                         <div class="quantity">
                                             <div class="pro-qty">
-                                                <input type="number" name="cant" min="1" max="<?php echo $product->getStock(); ?>" value="1"> 
+                                                <input type="number" name="cant" min="1"<?php echo $allowNoStock ? '' : ' max="'. (int)$product->getStock() .'"'; ?> value="1">
                                             </div>
                                         </div>
                                     </div>
@@ -109,11 +113,13 @@
                                     <!-- <li><b>Grupo</b> <span><?php //echo ucfirst(strtolower($product->grupo)); ?></span></li> -->
                                 <?php //endif; ?>
 
+                                <?php if (!$allowNoStock) : ?>
                                 <li><b>Disponibilidad</b>
-                                <?php if ($product->getStock() == 0) : ?> 
-                                    <span class="text-danger">Sin Stock</span></li> 
+                                <?php if ($product->getStock() == 0) : ?>
+                                    <span class="text-danger">Sin Stock</span></li>
                                 <?php else: ?>
                                     <span>Hay Stock</span></li>
+                                <?php endif; ?>
                                 <?php endif; ?>
 
                                 <?php if ($product->observaciones) : ?>

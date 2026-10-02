@@ -529,6 +529,7 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'operationC
     $show_prices = (isset($_POST['show_prices']) ? $_POST['show_prices'] : null);
     $active_register = (isset($_POST['active_register']) ? $_POST['active_register'] : null);
     $show_instagram = (isset($_POST['show_instagram']) ? $_POST['show_instagram'] : null);
+    $allow_no_stock = (isset($_POST['allow_no_stock']) ? $_POST['allow_no_stock'] : null);
     
     try {
 
@@ -605,6 +606,7 @@ if( !empty($_POST) && isset($_POST['action']) && $_POST['action'] == 'operationC
         $general->show_prices = $show_prices == '1' ? 1 : 0;
         $general->active_register = $active_register == '1' ? 1 : 0;
         $general->show_instagram = $show_instagram == '1' ? 1 : 0;
+        $general->allow_no_stock = $allow_no_stock == '1' ? 1 : 0;
         $general->update();
         die('true');
 

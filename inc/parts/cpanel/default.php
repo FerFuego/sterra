@@ -147,10 +147,18 @@
             </div>
             <div class="d-flex">
                 <div class="form-group w-100 pl-2">
-                    <label for="active_register">Activar el regitros de usuarios</label> 
+                    <label for="active_register">Activar el regitros de usuarios</label>
                 </div>
                 <div class="form-group w-100 pl-2">
                     <input type="checkbox" name="active_register" id="active_register" value="1" <?php echo $general->active_register ? 'checked' : ''; ?>>
+                </div>
+            </div>
+            <div class="d-flex">
+                <div class="form-group w-100 pl-2">
+                    <label for="allow_no_stock">Permitir pedir sin stock <span class="text-danger">(oculta la leyenda "Sin Stock" y habilita agregar al carrito aunque el producto no tenga stock disponible)</span></label>
+                </div>
+                <div class="form-group w-100 pl-2">
+                    <input type="checkbox" name="allow_no_stock" id="allow_no_stock" value="1" <?php echo $general->allow_no_stock ? 'checked' : ''; ?>>
                 </div>
             </div>
             <div class="d-flex">

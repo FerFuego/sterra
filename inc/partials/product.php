@@ -1,6 +1,8 @@
-<?php 
+<?php
     $stock = (int)($product->StockActual ?? 0);
     $priceFormatted = Store::checkUserCapabilities($product);
+    $allowNoStock = $general->allowNoStock();
+    $canAdd = $stock > 0 || $allowNoStock;
 ?>
 
 <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6">
@@ -11,7 +13,7 @@
             <div class="product__code">
                 <h5><?php echo 'COD: ' . $product->CodProducto; ?></h5>
             </div>
-            <?php if ($general->showLoginPrices() && $stock > 0): ?>
+            <?php if ($general->showLoginPrices() && $canAdd): ?>
                 <form class="js-form-cart">
                     <input type="hidden" name="id_product" value="<?php echo $product->Id_Producto; ?>">
                     <input type="hidden" name="cod_product" value="<?php echo $product->CodProducto; ?>">
@@ -46,19 +48,19 @@
                     <input type="hidden" name="price_product" value="<?php echo $priceFormatted; ?>">
                     <div class="d-flex">
                         <textarea type="text" name="nota" class="product__details__note"
-                            placeholder="Agregar Nota"><?php echo ($stock > 0) ? '' : 'Sin Stock'; ?></textarea>
+                            placeholder="Agregar Nota"><?php echo $canAdd ? '' : 'Sin Stock'; ?></textarea>
                     </div>
 
                     <div class="product__details__quantity mb-2">
                         <div class="quantity">
                             <div class="pro-qty">
-                                <input type="number" name="cant" min="1" max="<?php echo $stock; ?>"
-                                    value="<?php echo ($stock > 0) ? 1 : 0; ?>">
+                                <input type="number" name="cant" min="1"<?php echo $allowNoStock ? '' : ' max="'. $stock .'"'; ?>
+                                    value="<?php echo $canAdd ? 1 : 0; ?>">
                             </div>
                         </div>
                     </div>
 
-                    <input type="submit" class="primary-btn add-to-cart mb-2" value="+ CARRITO" <?php echo ($stock > 0) ? '' : 'disabled'; ?>>
+                    <input type="submit" class="primary-btn add-to-cart mb-2" value="+ CARRITO" <?php echo $canAdd ? '' : 'disabled'; ?>>
                 </form>
             <?php endif; ?>
         </div>

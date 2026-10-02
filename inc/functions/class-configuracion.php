@@ -24,12 +24,20 @@ class Configuracion {
     public $show_prices;
     public $promo_modal;
     public $active_register;
+    public $allow_no_stock;
     protected $obj;
 
-    
-	function __construct() {	
+
+	function __construct() {
 
 		$this->obj = new sQuery();
+
+        // Asegura columna allow_no_stock (permite pedir sin stock)
+        $check = $this->obj->executeQuery("SHOW COLUMNS FROM configuracion LIKE 'allow_no_stock'");
+        if ($check && mysqli_num_rows($check) == 0) {
+            $this->obj->executeQuery("ALTER TABLE configuracion ADD COLUMN allow_no_stock TINYINT(1) NOT NULL DEFAULT 0");
+        }
+
         $result = $this->obj->executeQuery("SELECT * FROM configuracion WHERE id='1'");
         $row = mysqli_fetch_assoc($result);
 
@@ -52,11 +60,12 @@ class Configuracion {
         $this->show_prices = $row['show_prices'];
         $this->promo_modal = $row['promo_modal'];
         $this->active_register = $row['active_register'];
+        $this->allow_no_stock = $row['allow_no_stock'] ?? 0;
 	}
 
     public function update() {
         $this->obj = new sQuery();
-        $this->obj->executeQuery("UPDATE configuracion SET id = '$this->id', logo = '$this->logo', banner = '$this->banner', telefono = '$this->telefono', email = '$this->email', direccion = '$this->direccion', atencion = '$this->atencion', whatsapp = '$this->whatsapp', facebook = '$this->facebook', instagram = '$this->instagram', twitter = '$this->twitter', aumento_1 = '$this->aumento_1', listaDefecto = '$this->listaDefecto', minimo = '$this->minimo', descuentos = '$this->descuentos', show_instagram = '$this->show_instagram', show_prices = '$this->show_prices', promo_modal = '$this->promo_modal', active_register = '$this->active_register' WHERE (id = '1')");
+        $this->obj->executeQuery("UPDATE configuracion SET id = '$this->id', logo = '$this->logo', banner = '$this->banner', telefono = '$this->telefono', email = '$this->email', direccion = '$this->direccion', atencion = '$this->atencion', whatsapp = '$this->whatsapp', facebook = '$this->facebook', instagram = '$this->instagram', twitter = '$this->twitter', aumento_1 = '$this->aumento_1', listaDefecto = '$this->listaDefecto', minimo = '$this->minimo', descuentos = '$this->descuentos', show_instagram = '$this->show_instagram', show_prices = '$this->show_prices', promo_modal = '$this->promo_modal', active_register = '$this->active_register', allow_no_stock = '$this->allow_no_stock' WHERE (id = '1')");
     }
 
     public function deletePromoBanner() {
@@ -92,6 +101,10 @@ class Configuracion {
 
     public function getListaDefecto(){
         return $this->listaDefecto;
+    }
+
+    public function allowNoStock(){
+        return !empty($this->allow_no_stock);
     }
     
     public function closeConnection(){

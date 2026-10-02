@@ -733,6 +733,7 @@ $(document).ready( function () {
             formData.append('show_prices', values.show_prices);
             formData.append('show_instagram', values.show_instagram);
             formData.append('active_register', values.active_register);
+            formData.append('allow_no_stock', values.allow_no_stock);
             formData.append('descuentos', JSON.stringify(obj));
 
         jQuery.ajax({

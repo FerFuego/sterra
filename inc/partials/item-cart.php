@@ -1,4 +1,8 @@
-<?php $prod = new Productos($item->CodProducto); ?>
+<?php
+    $prod = new Productos($item->CodProducto);
+    $cfgCart = new Configuracion();
+    $allowNoStock = $cfgCart->allowNoStock();
+?>
 <tr>
     <td class="shoping__cart__item">
         <div class="d-flex">
@@ -18,7 +22,7 @@
         <td class="shoping__cart__quantity">
             <div class="quantity">
                 <div class="pro-qty">
-                    <input type="number" name="cant" max="1000<?php echo $prod->getStock(); ?>" id="cant_<?php echo $item->Auto; ?>" value="<?php echo $item->Cantidad; ?>">
+                    <input type="number" name="cant"<?php echo $allowNoStock ? '' : ' max="1000'. (int)$prod->getStock() .'"'; ?> id="cant_<?php echo $item->Auto; ?>" value="<?php echo $item->Cantidad; ?>">
                 </div>
             </div>
         </td>
